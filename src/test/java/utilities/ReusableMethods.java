@@ -1,43 +1,154 @@
 package utilities;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReusableMethods {
-    public static void scrollDown() {
-        JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-    }
-
-    public static void hover(WebElement element) {
-        Actions actions = new Actions(Driver.getDriver());
-        actions.moveToElement(element).perform();
-    }
-
-    public static void waitFor(int sec) {
+    //HARD WAIT METHOD
+    public static void wait(int second) {
         try {
-            Thread.sleep(sec * 1000);
+            Thread.sleep(second * 1000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
-    public static String getScreenshot(String name) throws IOException {
-        // naming the screenshot with the current date to avoid duplication
-        String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-        // TakesScreenshot is an interface of selenium that takes the screenshot
-        TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
-        File source = ts.getScreenshotAs(OutputType.FILE);
-        // full path to the screenshot location
-        String target = System.getProperty("user.dir") + "/test-output/Screenshots/" + name + date + ".png";
-        File finalDestination = new File(target);
-        // save the screenshot to the path given
-        FileUtils.copyFile(source, finalDestination);
-        return target;
+    //Alert ACCEPT
+    public static void alertAccept() {
+        Driver.getDriver().switchTo().alert().accept();
+    }
+
+    //Alert DISMISS
+    public static void alertDismiss() {
+        Driver.getDriver().switchTo().alert().dismiss();
+    }
+
+    //Alert getText()
+    public static void alertText() {
+        Driver.getDriver().switchTo().alert().getText();
+    }
+
+    //Alert promptBox
+    public static void alertprompt(String text) {
+        Driver.getDriver().switchTo().alert().sendKeys(text);
+    }
+
+    //DropDown VisibleText
+    /*
+        Select select2 = new Select(day);
+        select2.selectByVisibleText("7");
+
+        //ddmVisibleText(day,"7"); --> can be also used instead of above expression
+     */
+    public static void ddmVisibleText(WebElement ddm, String option) {
+        Select select = new Select(ddm);
+        select.selectByVisibleText(option);
+    }
+
+    //DropDown Index
+    public static void ddmIndex(WebElement ddm, int index) {
+        Select select = new Select(ddm);
+        select.selectByIndex(index);
+    }
+
+    //DropDown Value
+    public static void ddmValue(WebElement ddm, String option) {
+        Select select = new Select(ddm);
+        select.selectByValue(option);
+    }
+
+    //SwitchToWindow1
+    public static void switchToWindow(int num) {
+        List<String> allWindowHandles = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+        Driver.getDriver().switchTo().window(allWindowHandles.get(num));
+    }
+
+    //SwitchToWindow2
+    public static void window(int num) {
+        Driver.getDriver().switchTo().window(Driver.getDriver().getWindowHandles().toArray()[num].toString());
+    }
+    //EXPLICIT WAIT METHODS
+
+    //Visible Wait
+    public static void visibleWait(WebElement element, int num) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(num));
+        wait.until(ExpectedConditions.visibilityOf(element));
+
+    }
+
+    //VisibleElementLocator Wait
+    public static WebElement visibleWait(By locator, int num) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(num));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+
+    }
+
+    //Alert Wait
+    public static void alertWait(int num) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(num));
+        wait.until(ExpectedConditions.alertIsPresent());
+
     }
 
 
+    //WebTable
+    public static void printData(int satir, int sutun) {
+        WebElement rowColumn = Driver.getDriver().findElement(By.xpath("(//tbody)[1]//tr[" + satir + "]//td[" + sutun + "]"));
+        System.out.println(rowColumn.getText());
+    }
+
+    //Click Method
+    public static void click(WebElement element) {
+        try {
+            element.click();
+        } catch (Exception e) {
+            JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+            js.executeScript("arguments[0].click();", element);
+        }
+    }
+
+    //JS Scroll
+    public static void scroll(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    //JS Scroll to End Of Page
+    public static void scrollEnd() {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
+
+    //JS Scroll to Top Of The Page
+    public static void scrollHome() {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("window.scrollTo(0,-document.body.scrollHeight)");
+    }
+
+    //JS SendKeys
+    public static void sendKeysJS(WebElement element, String text) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].value='" + text + "'", element);
+    }
+
+    //JS SendAttributeValue
+    public static void sendAttributeJS(WebElement element, String text) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].setAttribute('value','" + text + "')", element);
+    }
+
+    //JS GetAttributeValue
+    public static void getValueByJS(String id, String attributeName) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        String attribute_Value = (String) js.executeScript("return document.getElementById('" + id + "')." + attributeName);
+        System.out.println("Attribute Value: = " + attribute_Value);
+    }
 }

@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
                 "json:target/json-reports/Pcucumber1.json",
                 "junit:target/xml-report/Pcucumber1.xml"},
         features="src/test/resources/uiFeature/Login.feature",
-        glue="stepdefinitions",
+        glue= "stepDefinitions",
         tags=""  ,
 
         dryRun= false
