@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+=======
+    <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="" />
+>>>>>>> master
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,10 +62,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+<<<<<<< HEAD
     "git-widget-placeholder": "smyye",
+=======
+    "git-widget-placeholder": "huma",
+>>>>>>> master
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/mervearslan/Desktop/it/KnotisseProject",
-    "project.structure.last.edited": "Modules",
+    "last_opened_file_path": "C:/Users/humai/IdeaProjects/KnotisseProject",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3137931",
     "settings.editor.selected.configurable": "preferences.pluginManager"
@@ -153,7 +161,11 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
+<<<<<<< HEAD
         <option value="jdk-17.0.9-corretto-17.0.9-f644763e9732-ebaef533" />
+=======
+        <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555" />
+>>>>>>> master
       </set>
     </attachedChunks>
   </component>
