@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_09_2024,_12_32 PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_09_2024,_1_25 PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_09_2024__12_32PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_09_2024__1_25PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_09_2024,_12_33 PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_09_2024__12_33PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration.properties" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hooks/Hooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hooks/Hooks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US03_Merve_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US03_Merve_StepDefs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-output/embedded1.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded1.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +184,12 @@
       <updated>1725906429422</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:io.cucumber:cucumber-java" />
+    <option featureType="dependencySupport" implementationName="java:io.reactivex.rxjava3:rxjava" />
+    <option featureType="dependencySupport" implementationName="java:org.seleniumhq.selenium:selenium-java" />
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

@@ -29,7 +29,7 @@ public class HomePage {
     public WebElement firstProductAfterAnatolianKilimRugSearch;
 
     @FindBy(xpath = "//*[@class='product-title product_title entry-title']")
-    public WebElement titleOfAnatolianKilimRugSearch;
+    public WebElement titleOfAfterProductSearch;
 
 
 }

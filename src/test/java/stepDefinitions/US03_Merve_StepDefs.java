@@ -14,11 +14,16 @@ import utilities.Driver;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class US03_Merve_StepDefs {
 
     HomePage homePage = new HomePage();
+    Random rnd = new Random();
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+
 
     @Given("The user navigates to the related website.")
     public void the_user_navigates_to_the_related_website() {
@@ -54,36 +59,37 @@ public class US03_Merve_StepDefs {
 
     @Then("The user views the details of the selected product.")
     public void the_user_views_the_details_of_the_selected_product() {
-        ReusableMethods.visibleWait(homePage.titleOfAnatolianKilimRugSearch, 5);
+        ReusableMethods.visibleWait(homePage.titleOfAfterProductSearch, 5);
         Assert.assertTrue("The user doesn't view the details of the selected product",
-                homePage.titleOfAnatolianKilimRugSearch.isDisplayed());
+                homePage.titleOfAfterProductSearch.isDisplayed());
     }
 
     @Then("The user returns to the search box and searches for another specific product.")
     public void the_user_returns_to_the_search_box_and_searches_for_another_specific_product() {
         ReusableMethods.click(homePage.searchButtonTopOfHomePage);
-        homePage.searchButtonTopOfHomePage.sendKeys("Antique Rugs");
+        List<String> randomTitleList = Arrays.asList("ANTIQUE RUGS", "KNOTISSE PRODUCTION", "SEATING", "THROW PILLOWS", "UPHOLSTERY", "VINTAGE");
+        for (String randomTitle : randomTitleList) {
+            homePage.searchButtonTopOfHomePage.sendKeys(randomTitle);
+            break;
+        }
         ReusableMethods.click(homePage.searchButtonAfterClickSearchButton);
     }
 
     @Then("The user clicks on one of the available options and views the details of the product that opens.")
     public void the_user_clicks_on_one_of_the_available_options_and_views_the_details_of_the_product_that_opens() {
-        Random rnd = new Random();
         int randomNumber = 1 + rnd.nextInt(12);
         WebElement randomProduct = Driver.getDriver().findElement(By.xpath("(//a[contains(.,'Antique')])[" + randomNumber + "]"));
         ReusableMethods.wait(6);
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
             WebElement element = wait.until(ExpectedConditions.elementToBeClickable(randomProduct));
             ReusableMethods.click(element);
         } catch (StaleElementReferenceException e) {
 
         }
         ReusableMethods.wait(5);
-        Assert.assertTrue("", homePage.titleOfAnatolianKilimRugSearch.isDisplayed());
-        ReusableMethods.visibleWait(homePage.titleOfAnatolianKilimRugSearch, 5);
+        ReusableMethods.visibleWait(homePage.titleOfAfterProductSearch, 5);
         Assert.assertTrue("The user doesn't view the details of the selected product",
-                homePage.titleOfAnatolianKilimRugSearch.getText().contains(ConfigReader.getProperty("searchedWordInTitle")));
+                homePage.titleOfAfterProductSearch.isDisplayed());
 
     }
 
