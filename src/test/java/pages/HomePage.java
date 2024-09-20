@@ -22,4 +22,7 @@ public class HomePage {
     @FindBy(xpath = "(//i[@class='icon-search'])[1]")
     public WebElement searchButtonAfterClickSearchButton;
 
+    @FindBy(xpath = "//select[@class='search_categories resize-select mb-0']")
+    public WebElement searchDropdown;
+
 }

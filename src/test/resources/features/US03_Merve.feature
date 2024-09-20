@@ -16,8 +16,18 @@ Feature: An unregistered user can browse products on the Knottise website (both 
   Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results.
     Given The user navigates to the related website.
     Then The user clicks on the search icon.
-    Then With the All option selected from the dropdown, the user clicks the search button.
+    Then While on the "All" option, the user clicks on the search button.
     Then On the results page, the user sees the total number of search results.
     Then The user clicks on any product.
+    Then The user accesses the details of the selected product.
+    And The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses "Sort by latest".
+
+  @US03_TC03
+  Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results
+    Given The user navigates to the related website.
+    Then The user clicks on the search icon.
+    Then While on the "ANTIQUE RUGS" option, the user clicks on the search button.
+    Then On the results page, the user sees the total number of search results.
+    Then The user clicks on one of the available options and views the details of the product that opens.
     Then The user accesses the details of the selected product.
     And The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses "Sort by latest".

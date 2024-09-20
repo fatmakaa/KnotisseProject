@@ -13,11 +13,7 @@ public class CataloguePage {
     @FindBy(id = "menu-item-2210")
     public WebElement catalogueMenu;
 
-    @FindBy(xpath = "//*[@value='date']")
-    public WebElement sortByLatest;
-
     @FindBy(xpath = "//p[@class='woocommerce-result-count hide-for-medium']")
     public WebElement numberOfResultsAfterProductSearch;
-
 
 }

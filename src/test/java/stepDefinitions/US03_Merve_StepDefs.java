@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CataloguePage;
 import pages.HomePage;
@@ -96,15 +97,12 @@ public class US03_Merve_StepDefs {
 
     }
 
-    @Then("With the All option selected from the dropdown, the user clicks the search button.")
-    public void with_the_all_option_selected_from_the_dropdown_the_user_clicks_the_search_button() {
-        homePage.searchButtonAfterClickSearchButton.click();
-    }
 
     @Then("On the results page, the user sees the total number of search results.")
     public void on_the_results_page_the_user_sees_the_total_number_of_search_results() {
         Assert.assertTrue("On the results page, the user doesn't see the total number of search results.",
                 cataloguePage.numberOfResultsAfterProductSearch.isDisplayed());
+
     }
 
     @Then("The user clicks on any product.")
@@ -132,7 +130,17 @@ public class US03_Merve_StepDefs {
     @Then("The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses {string}.")
     public void the_user_sorts_the_products_based_on_their_preference_by_selecting_an_option_from_the_relevance_dropdown_chooses(String string) {
         cataloguePage.catalogueMenu.click();
-        cataloguePage.sortByLatest.click();
+        WebElement sortByElement = Driver.getDriver().findElement(By.xpath("//*[text()='" + string + "']"));
+        ReusableMethods.click(sortByElement);
+    }
+
+    @Then("While on the {string} option, the user clicks on the search button.")
+    public void while_on_the_option_the_user_clicks_on_the_search_button(String string) {
+        Select dropdown = new Select(homePage.searchDropdown);
+        dropdown.selectByVisibleText(string);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(homePage.searchButtonAfterClickSearchButton));
+        ReusableMethods.click(element);
+        ReusableMethods.scrollHome();
     }
 
 }
