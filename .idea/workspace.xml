@@ -4,7 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="" />
+=======
+    <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="">
+
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/US07_Huma.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/US13_Huma.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/US25_Huma.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/US31_Huma.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/US32_Huma.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/US37_Huma.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/US43_Huma.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_09_2024,_12_32 PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_09_2024,_1_25 PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_09_2024__12_32PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_09_2024__1_25PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_09_2024,_12_33 PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_09_2024__12_33PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
+      <change afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US03_Merve_StepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/runners/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/runners/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" afterDir="false" />
+
+    </list>
+>>>>>>> 8bba054e7750f94a117b86716f6283cc00067b43
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +78,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -66,6 +94,30 @@
   }
 }</component>
   <component name="RunManager" selected="JUnit.Runner">
+
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results..executor": "Run",
+    "JUnit.Runner.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "mrv",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/humai/IdeaProjects/KnotisseProject",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3137931",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="stepDefinitions" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results.">
+
     <configuration name="Runner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="runners.Runner" />
       <module name="KnotisseProject" />
@@ -87,6 +139,26 @@
       <module name="KnotisseProject" />
       <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
       <option name="SUGGESTED_NAME" value="Feature: US01_Fatma" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: The user searches for a specific type of product and views the relevant results." type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" />
+      <option name="GLUE" value="stepDefinitions hooks" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="KnotisseProject" />
+      <option name="NAME_FILTER" value="^The user searches for a specific type of product and views the relevant results\.$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^The user searches for a specific type of product and views the relevant results\.$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: The user searches for a specific type of product and views the relevant results." />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -135,17 +207,22 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results." />
         <item itemvalue="JUnit.Runner" />
         <item itemvalue="Cucumber Java.Scenario: US01_TC01" />
         <item itemvalue="Cucumber Java.Feature: US01_Fatma" />
         <item itemvalue="Application.Runner" />
+<<<<<<< HEAD
         <item itemvalue="JUnit.Runner" />
+=======
+>>>>>>> 8bba054e7750f94a117b86716f6283cc00067b43
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
+        <option value="jdk-17.0.9-corretto-17.0.9-f644763e9732-ebaef533" />
         <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555" />
       </set>
     </attachedChunks>
