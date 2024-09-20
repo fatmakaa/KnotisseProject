@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CataloguePage;
 import pages.HomePage;
+import pages.RandomPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -22,6 +23,7 @@ public class US03_Merve_StepDefs {
 
     HomePage homePage = new HomePage();
     CataloguePage cataloguePage = new CataloguePage();
+    RandomPage randomPage = new RandomPage();
     Random rnd = new Random();
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
@@ -55,14 +57,14 @@ public class US03_Merve_StepDefs {
 
     @Then("The user clicks on the first product.")
     public void the_user_clicks_on_the_first_product() {
-        ReusableMethods.click(cataloguePage.firstProductAfterAnatolianKilimRugSearch);
+        ReusableMethods.click(randomPage.firstProductAfterAnatolianKilimRugSearch);
     }
 
     @Then("The user views the details of the selected product.")
     public void the_user_views_the_details_of_the_selected_product() {
-        ReusableMethods.visibleWait(cataloguePage.titleOfAfterProductSearch, 5);
+        ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
         Assert.assertTrue("The user doesn't view the details of the selected product",
-                cataloguePage.titleOfAfterProductSearch.isDisplayed());
+                randomPage.titleOfAfterProductSearch.isDisplayed());
     }
 
     @Then("The user returns to the search box and searches for another specific product.")
@@ -88,9 +90,9 @@ public class US03_Merve_StepDefs {
 
         }
         ReusableMethods.wait(5);
-        ReusableMethods.visibleWait(cataloguePage.titleOfAfterProductSearch, 5);
+        ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
         Assert.assertTrue("The user doesn't view the details of the selected product",
-                cataloguePage.titleOfAfterProductSearch.isDisplayed());
+                randomPage.titleOfAfterProductSearch.isDisplayed());
 
     }
 
@@ -122,9 +124,9 @@ public class US03_Merve_StepDefs {
 
     @Then("The user accesses the details of the selected product.")
     public void the_user_accesses_the_details_of_the_selected_product() {
-        ReusableMethods.visibleWait(cataloguePage.titleOfAfterProductSearch, 5);
+        ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
         Assert.assertTrue("The user doesn't access the details of the selected product.",
-                cataloguePage.titleOfAfterProductSearch.isDisplayed());
+                randomPage.titleOfAfterProductSearch.isDisplayed());
     }
 
     @Then("The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses {string}.")
