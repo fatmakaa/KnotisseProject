@@ -11,6 +11,6 @@ public class Upholstery {
 
 @FindBy(xpath ="//li[@id='menu-item-2698']") public WebElement upholsteryMenu;
 
-
+@FindBy(xpath = "//p[@class='woocommerce-result-count hide-for-medium']") public  WebElement allOfProductList;
 
 }
