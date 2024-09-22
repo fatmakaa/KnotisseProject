@@ -1,0 +1,10 @@
+Index: src/test/resources/features/US07_Huma.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/features/US07_Huma.feature b/src/test/resources/features/US07_Huma.feature
+--- a/src/test/resources/features/US07_Huma.feature	(revision 58cf8e035c20f41801c84646020b8d9cd4db39ff)
++++ b/src/test/resources/features/US07_Huma.feature	(date 1726860751978)
+@@ -1,0 +1,1 @@
++
