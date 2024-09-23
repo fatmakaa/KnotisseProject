@@ -16,4 +16,10 @@ public class CataloguePage {
     @FindBy(xpath = "//p[@class='woocommerce-result-count hide-for-medium']")
     public WebElement numberOfResultsAfterProductSearch;
 
+    @FindBy(xpath = "//div[@class='box-text-inner'][1]")
+    public WebElement firstCatalogueDetail;
+
+    @FindBy(xpath = "//select[@class='orderby']")
+    public WebElement orderDropdown;
+
 }

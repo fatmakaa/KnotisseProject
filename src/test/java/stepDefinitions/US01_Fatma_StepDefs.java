@@ -5,7 +5,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
-import pages.Catalogue;
+import pages.CataloguePage;
 import pages.HomePage;
 import utilities.*;
 
@@ -13,7 +13,7 @@ import utilities.*;
 public class US01_Fatma_StepDefs {
     HomePage homePage = new HomePage();
 
-    Catalogue catalogue = new Catalogue();
+    CataloguePage catalogue = new CataloguePage();
 
 
     //-------------------------------------------TC01---------------------------------------------------------------

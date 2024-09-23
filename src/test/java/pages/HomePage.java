@@ -25,4 +25,14 @@ public class HomePage {
     @FindBy(xpath = "//select[@class='search_categories resize-select mb-0']")
     public WebElement searchDropdown;
 
+    @FindBy(linkText = "CATALOGUE")
+    public WebElement catalogue;
+
+    @FindBy(xpath = "//a[@href='https://knotisse.com/new-arrivals/'][1]")
+    public WebElement newArrivals;
+
+
+
+
+
 }
