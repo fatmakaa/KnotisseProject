@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration.properties" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/runners/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/runners/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/utilities/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utilities/Driver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pages/Catalogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/utilities/ReusableMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utilities/ReusableMethods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/features/US01_Fatma.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US01_Fatma.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +64,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "fatma",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/mervearslan/Desktop/it/KnotisseProject",
+    "last_opened_file_path": "/Users/fatmakarmis/IdeaProjects/KnotisseProject/src/test/java/utilities",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3137931",
@@ -145,10 +142,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.Runner" />
-        <item itemvalue="Cucumber Java.Feature: US01_Fatma" />
         <item itemvalue="Cucumber Java.Scenario: US01_TC01" />
+        <item itemvalue="Cucumber Java.Feature: US01_Fatma" />
         <item itemvalue="Application.Runner" />
-        <item itemvalue="Application.Runner" />
+        <item itemvalue="JUnit.Runner" />
       </list>
     </recent_temporary>
   </component>
