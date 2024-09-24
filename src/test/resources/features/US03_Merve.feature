@@ -1,9 +1,11 @@
 Feature: An unregistered user can browse products on the Knottise website (both from the top and bottom of the page
 
-  @US03_TC01
-  Scenario: The user searches for a specific type of product and views the relevant results.
+  Background:
     Given The user navigates to the related website.
     Then The user clicks on the search icon.
+
+  @US03_TC01
+  Scenario: The user searches for a specific type of product and views the relevant results.
     Then The user types "Anatolian Kilim Rug" into the search box.
     Then The user clicks the search button.
     Then The user sees the total number of results displayed in the window that opens.
@@ -14,8 +16,6 @@ Feature: An unregistered user can browse products on the Knottise website (both 
 
   @US03_TC02
   Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results.
-    Given The user navigates to the related website.
-    Then The user clicks on the search icon.
     Then While on the "All" option, the user clicks on the search button.
     Then On the results page, the user sees the total number of search results.
     Then The user clicks on any product.
@@ -24,8 +24,6 @@ Feature: An unregistered user can browse products on the Knottise website (both 
 
   @US03_TC03
   Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results.
-    Given The user navigates to the related website.
-    Then The user clicks on the search icon.
     Then While on the "ANTIQUE RUGS" option, the user clicks on the search button.
     Then On the results page, the user sees the total number of search results.
     Then The user clicks on one of the available options and views the details of the product that opens.

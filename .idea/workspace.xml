@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration.properties" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US03_Merve_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US03_Merve_StepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/runners/GridRunner.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +80,7 @@
       <recent name="stepDefinitions" />
     </key>
   </component>
-  <component name="RunManager" selected="Cucumber Java.Scenario: The user performs a search using the &quot;KNOTISSE PRODUCTION&quot; option without registering, accesses the product results and details, views the total number of results, and sorts the products by rating.">
+  <component name="RunManager" selected="Cucumber Java.Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results.">
     <configuration name="Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results." type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" />
@@ -102,15 +101,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+    <configuration name="Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results." type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" />
       <option name="GLUE" value="stepDefinitions hooks" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="KnotisseProject" />
-      <option name="NAME_FILTER" value="^The user can search via the dropdown using the \'ANTIQUE RUGS\' option without registering\, access the products and their details on the resulting page\, and see the total number of results$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^The user can search via the dropdown using the \'ANTIQUE RUGS\' option without registering\, access the products and their details on the resulting page\, and see the total number of results$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results" />
+      <option name="NAME_FILTER" value="^The user can search via the dropdown using the \'ANTIQUE RUGS\' option without registering\, access the products and their details on the resulting page\, and see the total number of results\.$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^The user can search via the dropdown using the \'ANTIQUE RUGS\' option without registering\, access the products and their details on the resulting page\, and see the total number of results\.$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results." />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -179,11 +178,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results." />
+        <item itemvalue="Cucumber Java.Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results." />
+        <item itemvalue="Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results." />
         <item itemvalue="Cucumber Java.Scenario: The user performs a search using the &quot;KNOTISSE PRODUCTION&quot; option without registering, accesses the product results and details, views the total number of results, and sorts the products by rating." />
         <item itemvalue="JUnit.Runner" />
-        <item itemvalue="Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results." />
-        <item itemvalue="Cucumber Java.Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results" />
-        <item itemvalue="Cucumber Java.Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results." />
       </list>
     </recent_temporary>
   </component>
