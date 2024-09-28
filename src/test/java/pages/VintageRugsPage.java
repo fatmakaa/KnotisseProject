@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+import java.util.List;
+
 public class VintageRugsPage {
 
     public VintageRugsPage (){
@@ -34,6 +36,30 @@ public class VintageRugsPage {
     public WebElement showingResults;
     @FindBy(xpath = "//select[@name='orderby']")
     public WebElement dropdownSorting;
+    @FindBy(xpath = "//div[@class='shop-container']")
+    public List<WebElement> randomProductList;
+    @FindBy(xpath = "//div[contains(@class, 'product-info') and contains(@class, 'summary') and contains(@class, 'col-fit') and contains(@class, 'entry-summary') and contains(@class, 'product-summary')]")
+    public WebElement productInfo;
+    @FindBy(xpath = "//div[contains(@class, 'woocommerce-product-gallery__wrapper') and contains(@class, 'product-gallery-slider') and contains(@class, 'slider') and contains(@class, 'slider-nav-small') and contains(@class, 'mb-half') and contains(@class, 'has-image-zoom') and contains(@class, 'is-draggable') and contains(@class, 'flickity-enabled')]")
+    public WebElement productImage;
+    @FindBy(xpath = "//div[@class='easyzoom-flyout']")
+    public WebElement getProductImageZoom;
+
+    @FindBy(xpath = "//button[contains(text(), 'ADD to QUOTE LIST')]")
+    public WebElement addToQuoteListButton;
+
+    @FindBy(id = "tab-title-description")
+    public WebElement description;
+    @FindBy(id = "tab-title-additional_information")
+    public WebElement additionalInformation;
+    @FindBy(xpath = "//h3[contains(text(),'Related products')]")
+    public WebElement relatedProducts;
+    @FindBy(id = "woocommerce-product-search-field-2")
+    public WebElement searchInputTopOgPage;
+    @FindBy(id = "woocommerce-product-search-field-3")
+    public WebElement searchInputBottomOgPage;
+
+
 
 
 
