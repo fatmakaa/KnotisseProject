@@ -19,13 +19,13 @@ public class Hooks {
         if (scenario.isFailed()) {
             final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot,"image/png","failed_screenshot");
-            Driver.closeDriver();
+         //   Driver.closeDriver();
         }
     }
 
     //    we can use conditional hooks using cucumber tags
-    @After("")
-    public void afterAllTearDown(){
-      Driver.getDriver().close();
-    }
+//    @After("")
+//    public void afterAllTearDown(){
+//      Driver.getDriver().close();
+//    }
 }
