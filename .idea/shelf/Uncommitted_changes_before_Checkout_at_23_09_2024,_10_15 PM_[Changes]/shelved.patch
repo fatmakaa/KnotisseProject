@@ -1,0 +1,473 @@
+Index: src/test/java/pages/HomePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pages;\n\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.support.FindAll;\nimport org.openqa.selenium.support.FindBy;\nimport org.openqa.selenium.support.FindBys;\nimport org.openqa.selenium.support.PageFactory;\nimport utilities.Driver;\n\nimport java.util.List;\n\npublic class HomePage {\n\n    public HomePage(){\n        PageFactory.initElements(Driver.getDriver(),this);\n\n    }\n\n    @FindBy(xpath = \"(//a[@href='#search-lightbox'])[1]\")\n    public WebElement searchButtonTopOfHomePage;\n\n    @FindBy(xpath = \"(//i[@class='icon-search'])[1]\")\n    public WebElement searchButtonAfterClickSearchButton;\n\n    @FindBy(xpath = \"//select[@class='search_categories resize-select mb-0']\")\n    public WebElement searchDropdown;\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/pages/HomePage.java b/src/test/java/pages/HomePage.java
+--- a/src/test/java/pages/HomePage.java	(revision 9ee6d42d1ede3323438ada2c17421621cb76c7b2)
++++ b/src/test/java/pages/HomePage.java	(date 1727118753777)
+@@ -1,28 +1,30 @@
+ package pages;
+ 
+ import org.openqa.selenium.WebElement;
+-import org.openqa.selenium.support.FindAll;
+ import org.openqa.selenium.support.FindBy;
+-import org.openqa.selenium.support.FindBys;
+ import org.openqa.selenium.support.PageFactory;
+ import utilities.Driver;
+ 
+-import java.util.List;
+-
+ public class HomePage {
+ 
+     public HomePage(){
+         PageFactory.initElements(Driver.getDriver(),this);
++    }
+ 
+-    }
++
++    @FindBy(linkText = "CATALOGUE")
++    public WebElement catalogue;
++
++
++    @FindBy(xpath = "//a[@href='https://knotisse.com/new-arrivals/'][1]")
++    public WebElement newArrivals;
++
+ 
+-    @FindBy(xpath = "(//a[@href='#search-lightbox'])[1]")
+-    public WebElement searchButtonTopOfHomePage;
+ 
+-    @FindBy(xpath = "(//i[@class='icon-search'])[1]")
+-    public WebElement searchButtonAfterClickSearchButton;
+ 
+-    @FindBy(xpath = "//select[@class='search_categories resize-select mb-0']")
+-    public WebElement searchDropdown;
++
++
++
++
+ 
+ }
+Index: src/test/java/stepDefinitions/US01_Fatma_StepDefs.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package stepDefinitions;\n\nimport io.cucumber.java.en.Then;\nimport io.cucumber.java.en.When;\nimport org.openqa.selenium.support.ui.Wait;\nimport utilities.ConfigReader;\nimport utilities.Driver;\n\n\npublic class US01_Fatma_StepDefs {\n\n    @When(\"İlgili web siteye gidilir.\")\n    public void i̇lgili_web_siteye_gidilir() throws InterruptedException {\n\n        Driver.getDriver().get(ConfigReader.getProperty(\"baseUrl\"));\n    }\n\n    @Then(\"Home page üzerinden {string} menüsüne tıklanır.\")\n    public void home_page_üzerinden_menüsüne_tıklanır(String string) {\n\n\n    }\n    @Then(\"İlgili ürünlerin listelendiği doğrulanır.\")\n    public void i̇lgili_ürünlerin_listelendiği_doğrulanır() {\n\n    }\n    @Then(\"Alternatif olarak, başka bir sayfa üzerinden \\\\(örn. new arrivals sayfası) {string} menüsüne tıklanır.\")\n    public void alternatif_olarak_başka_bir_sayfa_üzerinden_örn_new_arrivals_sayfası_menüsüne_tıklanır(String string) {\n\n    }\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java b/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java
+--- a/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java	(revision 9ee6d42d1ede3323438ada2c17421621cb76c7b2)
++++ b/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java	(date 1727118629642)
+@@ -2,34 +2,122 @@
+ 
+ import io.cucumber.java.en.Then;
+ import io.cucumber.java.en.When;
++import org.junit.Assert;
++import org.openqa.selenium.support.ui.Select;
+ import org.openqa.selenium.support.ui.Wait;
+-import utilities.ConfigReader;
+-import utilities.Driver;
++import pages.Catalogue;
++import pages.HomePage;
++import utilities.*;
+ 
+ 
+ public class US01_Fatma_StepDefs {
++    HomePage homePage = new HomePage();
++
++    Catalogue catalogue = new Catalogue();
+ 
+-    @When("İlgili web siteye gidilir.")
+-    public void i̇lgili_web_siteye_gidilir() throws InterruptedException {
+ 
++    //-------------------------------------------TC01---------------------------------------------------------------
++
++    @When("User navigates to the relevant website.")
++    public void user_navigates_to_the_relative_website() {
+         Driver.getDriver().get(ConfigReader.getProperty("baseUrl"));
+     }
+ 
+-    @Then("Home page üzerinden {string} menüsüne tıklanır.")
+-    public void home_page_üzerinden_menüsüne_tıklanır(String string) {
++    @Then("Clicks on Catalogue.")
++    public void clicks_on_catalogue() {
++        homePage.catalogue.click();
++    }
++
++    @Then("Verifies that related products show up.")
++    public void verifies_that_related_products_show_up() {
++        ReusableMethods.flashElement(homePage.catalogue);
++    }
++
++    @Then("Navigates to the New Arrivals link.")
++    public void navigates_to_the_new_arrivals_link() {
++        homePage.newArrivals.click();
++        ReusableMethods.flashElement(homePage.newArrivals);
++    }
++
++    @Then("Clicks on Catalogue again.")
++    public void clicks_on_catalogue_again() {
++        homePage.catalogue.click();
++    }
++
++
++    // -------------------------------------------TC02---------------------------------------------------------------
++
++
++    @Then("Verifies that product details are clearly displayed.")
++    public void verifies_that_product_details_are_clearly_displayed() {
++
++        Assert.assertTrue(catalogue.firstCatalogueDetail.isDisplayed());
++        JSUtils.JSscrollIntoView(catalogue.firstCatalogueDetail);
++        ReusableMethods.flashElement(catalogue.firstCatalogueDetail);
++
++    }
++
++
++    // -------------------------------------------TC03---------------------------------------------------------------
++
+ 
++    @Then("Clicks on the Default sorting menu on the catalog page.")
++    public void clicks_on_the_default_sorting_menu_on_the_catalog_page() {
++        catalogue.orderDropdown.click();
++    }
+ 
++    @Then("Selects the Sort by average rating option.")
++    public void selects_the_sort_by_average_rating_option() {
++        Select select = new Select(catalogue.orderDropdown);
++        select.selectByVisibleText("Sort by average rating");
+     }
+-    @Then("İlgili ürünlerin listelendiği doğrulanır.")
+-    public void i̇lgili_ürünlerin_listelendiği_doğrulanır() {
++
++    @Then("Verifies that the sorting is done based on average rating.")
++    public void verifies_that_the_sorting_is_done_based_on_average_rating() {
++
++        Select select = new Select(catalogue.orderDropdown);
++        String selectedOption = select.getFirstSelectedOption().getText();
++        Assert.assertEquals("Sort by average rating", selectedOption);
+ 
+     }
+-    @Then("Alternatif olarak, başka bir sayfa üzerinden \\(örn. new arrivals sayfası) {string} menüsüne tıklanır.")
+-    public void alternatif_olarak_başka_bir_sayfa_üzerinden_örn_new_arrivals_sayfası_menüsüne_tıklanır(String string) {
+ 
++
++    // -------------------------------------------TC04---------------------------------------------------------------
++
++    @Then("Selects the Sort by latest option.")
++    public void selects_the_sort_by_latest_option() {
++        Select select = new Select(catalogue.orderDropdown);
++        select.selectByVisibleText("Sort by latest");
+     }
+ 
+ 
++    @Then("Verifies that the sorting is done based on the newest products.")
++    public void verifies_that_the_sorting_is_done_based_on_the_newest_products() {
+ 
++        Select select = new Select(catalogue.orderDropdown);
++        String selectedOption = select.getFirstSelectedOption().getText();
++        Assert.assertEquals("Sort by latest", selectedOption);
++
++    }
++
++
++    // -------------------------------------------TC05---------------------------------------------------------------
++
++    @Then("Selects the Sort by popularity sorting option.")
++    public void selects_the_sort_by_popularity_sorting_option() {
++
++        Select select = new Select(catalogue.orderDropdown);
++        select.selectByVisibleText("Sort by popularity");
++
++    }
++
++    @Then("Verifies  that the sorting is done based on the most popular products.")
++    public void verifies_that_the_sorting_is_done_based_on_the_most_popular_products() {
++
++        Select select = new Select(catalogue.orderDropdown);
++        String selectedOption = select.getFirstSelectedOption().getText();
++        Assert.assertEquals("Sort by popularity", selectedOption);
++
++    }
+ 
+ }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n    <option name=\"workspaceImportForciblyTurnedOn\" value=\"true\" />\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_19\" default=\"true\" project-jdk-name=\"corretto-19\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 9ee6d42d1ede3323438ada2c17421621cb76c7b2)
++++ b/.idea/misc.xml	(date 1727118882922)
+@@ -7,7 +7,6 @@
+         <option value="$PROJECT_DIR$/pom.xml" />
+       </list>
+     </option>
+-    <option name="workspaceImportForciblyTurnedOn" value="true" />
+   </component>
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="corretto-19" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"8aeaeea6-4d09-4f71-a369-474301a18c77\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_20_2024_10_26_PM__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_20_2024_10_26_PM__Changes_.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n    &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;Arslnmerv&quot;\n    }\n    }</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n    &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/fatmakaa/KnotisseProject.git&quot;,\n    &quot;accountId&quot;: &quot;9852423e-2b6c-4376-87cc-8a308ae85b89&quot;\n    }\n    }</component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n    &quot;associatedIndex&quot;: 0\n    }</component>\n  <component name=\"ProjectId\" id=\"2lqT5q87fDQtEEFgnJq2MdiE48o\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;huma&quot;,\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/Users/mervearslan/Desktop/it/KnotisseProject&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.3137931&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;\n  }\n}</component>\n  <component name=\"RunManager\" selected=\"Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results.\">\n    <configuration name=\"Runner\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"runners.Runner\" />\n      <module name=\"KnotisseProject\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"runners.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Feature: US01_Fatma\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/US01_Fatma.feature\" />\n      <option name=\"GLUE\" value=\"stepDefinitions hooks\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\n      <module name=\"KnotisseProject\" />\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter\" />\n      <option name=\"SUGGESTED_NAME\" value=\"Feature: US01_Fatma\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Scenario: The user searches for a specific type of product and views the relevant results.\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature\" />\n      <option name=\"GLUE\" value=\"stepDefinitions hooks\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\n      <module name=\"KnotisseProject\" />\n      <option name=\"NAME_FILTER\" value=\"^The user searches for a specific type of product and views the relevant results\\.$\" />\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^The user searches for a specific type of product and views the relevant results\\.$&quot;\" />\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: The user searches for a specific type of product and views the relevant results.\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Scenario: US01_TC01\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/US01_Fatma.feature\" />\n      <option name=\"GLUE\" value=\"stepDefinitions hooks\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\n      <module name=\"KnotisseProject\" />\n      <option name=\"NAME_FILTER\" value=\"^US01_TC01$\" />\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^US01_TC01$&quot;\" />\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: US01_TC01\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Runner\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"KnotisseProject\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"runners.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"PACKAGE_NAME\" value=\"runners\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"runners.Runner\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results.\" />\n        <item itemvalue=\"JUnit.Runner\" />\n        <item itemvalue=\"Cucumber Java.Scenario: US01_TC01\" />\n        <item itemvalue=\"Cucumber Java.Feature: US01_Fatma\" />\n        <item itemvalue=\"Application.Runner\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"8aeaeea6-4d09-4f71-a369-474301a18c77\" name=\"Changes\" comment=\"\" />\n      <created>1725906429422</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1725906429422</updated>\n    </task>\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 9ee6d42d1ede3323438ada2c17421621cb76c7b2)
++++ b/.idea/workspace.xml	(date 1727118882920)
+@@ -5,8 +5,12 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_20_2024_10_26_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_20_2024_10_26_PM__Changes_.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/test/java/pages/Catalogue.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/test/resources/features/US01_Fatma.feature" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/utilities/ReusableMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utilities/ReusableMethods.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -29,23 +33,23 @@
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="GitHubPullRequestSearchHistory">{
+-    &quot;lastFilter&quot;: {
++  &quot;lastFilter&quot;: {
+     &quot;state&quot;: &quot;OPEN&quot;,
+     &quot;assignee&quot;: &quot;Arslnmerv&quot;
+-    }
+-    }</component>
++  }
++}</component>
+   <component name="GithubPullRequestsUISettings">{
+-    &quot;selectedUrlAndAccountId&quot;: {
++  &quot;selectedUrlAndAccountId&quot;: {
+     &quot;url&quot;: &quot;https://github.com/fatmakaa/KnotisseProject.git&quot;,
+     &quot;accountId&quot;: &quot;9852423e-2b6c-4376-87cc-8a308ae85b89&quot;
+-    }
+-    }</component>
++  }
++}</component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProjectColorInfo">{
+-    &quot;associatedIndex&quot;: 0
+-    }</component>
++  &quot;associatedIndex&quot;: 0
++}</component>
+   <component name="ProjectId" id="2lqT5q87fDQtEEFgnJq2MdiE48o" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="2" id="Add" />
+@@ -54,21 +58,21 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;huma&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;/Users/mervearslan/Desktop/it/KnotisseProject&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.3137931&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "Merging master",
++    "kotlin-language-version-configured": "true",
++    "last_opened_file_path": "/Users/fatmakarmis/IdeaProjects/KnotisseProject/src/test/java/utilities",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.3137931",
++    "settings.editor.selected.configurable": "preferences.pluginManager"
+   }
+-}</component>
+-  <component name="RunManager" selected="Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results.">
++}]]></component>
++  <component name="RunManager" selected="JUnit.Runner">
+     <configuration name="Runner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="runners.Runner" />
+       <module name="KnotisseProject" />
+@@ -101,26 +105,6 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="Scenario: The user searches for a specific type of product and views the relevant results." type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+-      <option name="CUCUMBER_CORE_VERSION" value="5" />
+-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" />
+-      <option name="GLUE" value="stepDefinitions hooks" />
+-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+-      <module name="KnotisseProject" />
+-      <option name="NAME_FILTER" value="^The user searches for a specific type of product and views the relevant results\.$" />
+-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^The user searches for a specific type of product and views the relevant results\.$&quot;" />
+-      <option name="SUGGESTED_NAME" value="Scenario: The user searches for a specific type of product and views the relevant results." />
+-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+     <configuration name="Scenario: US01_TC01" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+       <option name="CUCUMBER_CORE_VERSION" value="5" />
+       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/US01_Fatma.feature" />
+@@ -158,11 +142,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results." />
+         <item itemvalue="JUnit.Runner" />
+         <item itemvalue="Cucumber Java.Scenario: US01_TC01" />
+         <item itemvalue="Cucumber Java.Feature: US01_Fatma" />
+         <item itemvalue="Application.Runner" />
++        <item itemvalue="JUnit.Runner" />
+       </list>
+     </recent_temporary>
+   </component>
+Index: src/test/java/pages/Catalogue.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/pages/Catalogue.java b/src/test/java/pages/Catalogue.java
+new file mode 100644
+--- /dev/null	(date 1727118629641)
++++ b/src/test/java/pages/Catalogue.java	(date 1727118629641)
+@@ -0,0 +1,28 @@
++package pages;
++
++import org.openqa.selenium.WebElement;
++import org.openqa.selenium.support.FindBy;
++import org.openqa.selenium.support.PageFactory;
++import utilities.Driver;
++
++public class Catalogue {
++
++
++
++    public Catalogue(){
++        PageFactory.initElements(Driver.getDriver(),this);
++    }
++
++    @FindBy(xpath = "//div[@class='box-text-inner'][1]")
++    public WebElement firstCatalogueDetail;
++
++
++    @FindBy(xpath = "//select[@class='orderby']")
++    public WebElement orderDropdown;
++
++
++
++
++
++
++}
+Index: src/test/java/utilities/ReusableMethods.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package utilities;\n\nimport org.openqa.selenium.By;\nimport org.openqa.selenium.JavascriptExecutor;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.support.ui.ExpectedConditions;\nimport org.openqa.selenium.support.ui.Select;\nimport org.openqa.selenium.support.ui.WebDriverWait;\n\nimport java.time.Duration;\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class ReusableMethods {\n    //HARD WAIT METHOD\n    public static void wait(int second) {\n        try {\n            Thread.sleep(second * 1000);\n        } catch (InterruptedException e) {\n            throw new RuntimeException(e);\n        }\n    }\n\n    //Alert ACCEPT\n    public static void alertAccept() {\n        Driver.getDriver().switchTo().alert().accept();\n    }\n\n    //Alert DISMISS\n    public static void alertDismiss() {\n        Driver.getDriver().switchTo().alert().dismiss();\n    }\n\n    //Alert getText()\n    public static void alertText() {\n        Driver.getDriver().switchTo().alert().getText();\n    }\n\n    //Alert promptBox\n    public static void alertprompt(String text) {\n        Driver.getDriver().switchTo().alert().sendKeys(text);\n    }\n\n    //DropDown VisibleText\n    /*\n        Select select2 = new Select(day);\n        select2.selectByVisibleText(\"7\");\n\n        //ddmVisibleText(day,\"7\"); --> can be also used instead of above expression\n     */\n    public static void ddmVisibleText(WebElement ddm, String option) {\n        Select select = new Select(ddm);\n        select.selectByVisibleText(option);\n    }\n\n    //DropDown Index\n    public static void ddmIndex(WebElement ddm, int index) {\n        Select select = new Select(ddm);\n        select.selectByIndex(index);\n    }\n\n    //DropDown Value\n    public static void ddmValue(WebElement ddm, String option) {\n        Select select = new Select(ddm);\n        select.selectByValue(option);\n    }\n\n    //SwitchToWindow1\n    public static void switchToWindow(int num) {\n        List<String> allWindowHandles = new ArrayList<String>(Driver.getDriver().getWindowHandles());\n        Driver.getDriver().switchTo().window(allWindowHandles.get(num));\n    }\n\n    //SwitchToWindow2\n    public static void window(int num) {\n        Driver.getDriver().switchTo().window(Driver.getDriver().getWindowHandles().toArray()[num].toString());\n    }\n    //EXPLICIT WAIT METHODS\n\n    //Visible Wait\n    public static void visibleWait(WebElement element, int num) {\n        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(num));\n        wait.until(ExpectedConditions.visibilityOf(element));\n\n    }\n\n    //VisibleElementLocator Wait\n    public static WebElement visibleWait(By locator, int num) {\n        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(num));\n        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));\n\n    }\n\n    //Alert Wait\n    public static void alertWait(int num) {\n        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(num));\n        wait.until(ExpectedConditions.alertIsPresent());\n\n    }\n\n\n    //WebTable\n    public static void printData(int satir, int sutun) {\n        WebElement rowColumn = Driver.getDriver().findElement(By.xpath(\"(//tbody)[1]//tr[\" + satir + \"]//td[\" + sutun + \"]\"));\n        System.out.println(rowColumn.getText());\n    }\n\n    //Click Method\n    public static void click(WebElement element) {\n        try {\n            element.click();\n        } catch (Exception e) {\n            JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\n            js.executeScript(\"arguments[0].click();\", element);\n        }\n    }\n\n    //JS Scroll\n    public static void scroll(WebElement element) {\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\n        js.executeScript(\"arguments[0].scrollIntoView(true);\", element);\n    }\n\n    //JS Scroll to End Of Page\n    public static void scrollEnd() {\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\n        js.executeScript(\"window.scrollTo(0,document.body.scrollHeight)\");\n    }\n\n    //JS Scroll to Top Of The Page\n    public static void scrollHome() {\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\n        js.executeScript(\"window.scrollTo(0,-document.body.scrollHeight)\");\n    }\n\n    //JS SendKeys\n    public static void sendKeysJS(WebElement element, String text) {\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\n        js.executeScript(\"arguments[0].value='\" + text + \"'\", element);\n    }\n\n    //JS SendAttributeValue\n    public static void sendAttributeJS(WebElement element, String text) {\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\n        js.executeScript(\"arguments[0].setAttribute('value','\" + text + \"')\", element);\n    }\n\n    //JS GetAttributeValue\n    public static void getValueByJS(String id, String attributeName) {\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\n        String attribute_Value = (String) js.executeScript(\"return document.getElementById('\" + id + \"').\" + attributeName);\n        System.out.println(\"Attribute Value: = \" + attribute_Value);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/utilities/ReusableMethods.java b/src/test/java/utilities/ReusableMethods.java
+--- a/src/test/java/utilities/ReusableMethods.java	(revision 9ee6d42d1ede3323438ada2c17421621cb76c7b2)
++++ b/src/test/java/utilities/ReusableMethods.java	(date 1727118629642)
+@@ -151,4 +151,25 @@
+         String attribute_Value = (String) js.executeScript("return document.getElementById('" + id + "')." + attributeName);
+         System.out.println("Attribute Value: = " + attribute_Value);
+     }
+-}
++
++
++    //Flash Element
++    public static void flashElement(WebElement element) {
++        JavascriptExecutor jsExecutor = (JavascriptExecutor) Driver.getDriver();
++        for (int i = 0; i < 10; i++) {
++            jsExecutor.executeScript("arguments[0].style.backgroundColor = 'blue'", element);
++            try {
++                Thread.sleep(50);
++            } catch (InterruptedException e) {
++                throw new RuntimeException(e);
++            }
++            jsExecutor.executeScript("arguments[0].style.backgroundColor = ''", element);
++            try {
++                Thread.sleep(50);
++            } catch (InterruptedException e) {
++                throw new RuntimeException(e);
++            }
++        }
++    }
++
++}
+\ No newline at end of file
+Index: src/test/resources/features/US01_Fatma.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/features/US01_Fatma.feature b/src/test/resources/features/US01_Fatma.feature
+new file mode 100644
+--- /dev/null	(date 1727118756354)
++++ b/src/test/resources/features/US01_Fatma.feature	(date 1727118756354)
+@@ -0,0 +1,42 @@
++Feature: US01
++  @US01_TC01
++  Scenario: US01_TC01
++    When User navigates to the relevant website.
++    Then Clicks on Catalogue.
++    Then Verifies that related products show up.
++    Then Navigates to the New Arrivals link.
++    Then Clicks on Catalogue again.
++     And Verifies that related products show up.
++
++  @US01_TC02
++  Scenario: US01_TC02
++    When User navigates to the relevant website.
++    Then Clicks on Catalogue.
++    And Verifies that product details are clearly displayed.
++
++  @US01_TC03
++  Scenario: US01_TC03
++    When User navigates to the relevant website.
++    Then Clicks on Catalogue.
++    Then Clicks on the Default sorting menu on the catalog page.
++    Then Selects the Sort by average rating option.
++    And Verifies that the sorting is done based on average rating.
++
++
++  @US01_TC04
++  Scenario: US01_TC04
++    When User navigates to the relevant website.
++    Then Clicks on Catalogue.
++    Then Clicks on the Default sorting menu on the catalog page.
++    Then Selects the Sort by latest option.
++    And Verifies that the sorting is done based on the newest products.
++
++
++  @US01_TC05
++  Scenario: US01_TC05
++    When User navigates to the relevant website.
++    Then Clicks on Catalogue.
++    Then Clicks on the Default sorting menu on the catalog page.
++    Then Selects the Sort by popularity sorting option.
++    And Verifies  that the sorting is done based on the most popular products.
++

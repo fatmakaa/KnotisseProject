@@ -26,6 +26,6 @@ public class Hooks {
     //    we can use conditional hooks using cucumber tags
     @After("")
     public void afterAllTearDown(){
-        System.out.println("This runs only after @regression");
+      Driver.getDriver().close();
     }
 }
