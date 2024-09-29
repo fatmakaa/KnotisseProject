@@ -26,6 +26,6 @@ public class Hooks {
     //    we can use conditional hooks using cucumber tags
     @After("")
     public void afterAllTearDown(){
-      Driver.getDriver().close();
+      // Driver.getDriver().close();
     }
 }

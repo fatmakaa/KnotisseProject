@@ -16,4 +16,8 @@ public class CataloguePage {
     @FindBy(xpath = "//p[@class='woocommerce-result-count hide-for-medium']")
     public WebElement numberOfResultsAfterProductSearch;
 
+    @FindBy(xpath = "//nav[@class='woocommerce-breadcrumb breadcrumbs uppercase']")
+    public WebElement searchResultsForText;
+
+
 }

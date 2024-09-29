@@ -25,4 +25,7 @@ public class HomePage {
     @FindBy(xpath = "//select[@class='search_categories resize-select mb-0']")
     public WebElement searchDropdown;
 
+    @FindBy(id = "woocommerce-product-search-field-0")
+    public WebElement searchBox;
+
 }
