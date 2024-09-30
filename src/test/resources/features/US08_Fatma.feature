@@ -1,7 +1,6 @@
 Feature: US08
 
   Background:
-    When user navigates to the relevant website.
     Then user clicks on the ANTIQUE RUGS tab
 
 
@@ -9,7 +8,7 @@ Feature: US08
   Scenario: User filters and adds a rug to wishlist.
 
     Then user should see a list of various rug models
-    And user should be able to filter the rug models by Default sorting, Sort by popularit, Sort by average rating, Sort by latest
+    And user should be able to filter the rug models by Default sorting, Sort by popularity, Sort by average rating, Sort by latest
     And when the user hovers over the product image, should be able to click ADD TO WISHLIST
     And when the user clicks on ADD TO WISHLIST, the product should be added to the wishlist
     And when the user hovers over the product image, should be able to click on Quick View

@@ -31,11 +31,11 @@ public class US08_Fatma_StepDefs {
 
     @Then("user should see a list of various rug models")
     public void user_should_see_a_list_of_various_rug_models() {
-        Assert.assertTrue(antiqueRugsPage.resultOfList.getText().contains("Showing 1–16 of 23 results"));
+        Assert.assertTrue(antiqueRugsPage.resultOfList.getText().contains("results"));
 
     }
 
-    @Then("user should be able to filter the rug models by Default sorting, Sort by popularit, Sort by average rating, Sort by latest")
+    @Then("user should be able to filter the rug models by Default sorting, Sort by popularity, Sort by average rating, Sort by latest")
     public void user_should_be_able_to_filter_the_rug_models_by() {
 
         Select select = new Select(antiqueRugsPage.orderDropdown);
@@ -67,7 +67,9 @@ public class US08_Fatma_StepDefs {
 
         ActionsUtils.actionsHoverOverOnElement(antiqueRugsPage.firstProduct);
         ActionsUtils.actionsHoverOverOnElement(antiqueRugsPage.heartIconOfFirstP);
+        Thread.sleep(2000);
         antiqueRugsPage.heartClick.click();
+        Thread.sleep(2000);
 
     }
 

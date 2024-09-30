@@ -65,11 +65,11 @@ public class Driver {
         driver.get().manage().window().maximize();
     }
     //    4. close driver
-//    public static void closeDriver(){
-//        if (driver!=null){
-//            driver.get().quit();
-//            driver.remove();
-//        }
-//    }
+   public static void closeDriver(){
+        if (driver!=null){
+            driver.get().quit();
+            driver.remove();
+        }
+    }
 
 }
