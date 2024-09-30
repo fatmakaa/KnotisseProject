@@ -4,14 +4,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.HomePage;
 import pages.VintageRugsPage;
+import utilities.ActionsUtils;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -25,7 +22,8 @@ import static org.junit.Assert.*;
 public class US07_Huma_StepDefs {
     VintageRugsPage vintageRugsPage = new VintageRugsPage();
     HomePage homePage = new HomePage();
-    Select dropdown;
+    Select  dropdown;
+
 
     @Given("Go to the website")
     public void goToTheWebsite() {
@@ -50,11 +48,10 @@ public class US07_Huma_StepDefs {
 
         assertTrue("The result message does not contain the expected text!", actualText.contains(expectedText));
     }
-
     @Then("Verify that the user sees sorting options like {string}, {string}, {string} and {string}")
     public void verifyThatTheUserSeesSortingOptionsLikeAnd(String optionDefault, String optionPopularity, String optionRating, String optionLatest) {
-        dropdown = new Select(vintageRugsPage.dropdownSorting);
 
+        dropdown = new Select(vintageRugsPage.dropdownSorting);
         List<WebElement> options = dropdown.getOptions();
 
         List<String> optionTexts = new ArrayList<>();
@@ -97,9 +94,7 @@ public class US07_Huma_StepDefs {
     @Then("Verify that when the user hovers over the product image, it zooms in")
     public void seesThatWhenTheUserHoversOverTheProductImageItZoomsIn() {
 
-       Actions actions = new Actions(Driver.getDriver());
-       actions.moveToElement(vintageRugsPage.productImage).perform();
-       actions.moveByOffset(20, 20).perform();
+        ActionsUtils.actionsHoverOverOnElement(vintageRugsPage.productImage);
 
        assertTrue("Image enlargement verification failed", vintageRugsPage.getProductImageZoom.isDisplayed());
     }
@@ -119,14 +114,14 @@ public class US07_Huma_StepDefs {
         assertTrue(followInstagram+" could not be displayed.", homePage.followInstagram.isDisplayed());
     }
 
-    @And("Verify that the {string} button should be visible and clickable")
-    public void verifyThatTheButtonShouldBeVisibleAndClickable(String addToQuoteListButton) {
+    @And("Verify that the ADD TO QUOTE LIST button should be visible and clickable")
+    public void verifyThatTheButtonShouldBeVisibleAndClickable() {
         assertTrue("Button could not be displayed.", vintageRugsPage.addToQuoteListButton.isDisplayed());
         assertTrue("Button could not be clickable.", vintageRugsPage.addToQuoteListButton.isEnabled());
     }
 
-    @When("Click the {string} button")
-    public void clickTheButton(String button) {
+    @When("Click the ADD TO QUOTE LIST button")
+    public void clickTheButton() {
         vintageRugsPage.addToQuoteListButton.click();
         ReusableMethods.visibleWait(vintageRugsPage.productAddedSuccessText,5);
     }

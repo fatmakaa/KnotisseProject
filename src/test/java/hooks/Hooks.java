@@ -9,10 +9,10 @@ import utilities.ConfigReader;
 import utilities.Driver;
 
 public class Hooks {
-    @Before
-    public void setUpScenarios(){
-//        System.out.println("Before Hooks");
-    }
+   // @Before
+   // public void setUpScenarios(){
+// //       System.out.println("Before Hooks");
+   // }
     @After
     public void afterTearDown(Scenario scenario){
 //        System.out.println("After Hooks");

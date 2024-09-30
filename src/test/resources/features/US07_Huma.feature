@@ -57,8 +57,8 @@ Feature: User views VINTAGE RUGS category, filters, view details and add to cart
     And Click on the "<category>" button
     And Clicks on any product
     Then Verify that the product detail page display sections "New Arrivals", "Product Category", "Product Search", and "Follow us on Instagram"
-    And Verify that the "ADD TO QUOTE LIST" button should be visible and clickable
-    When Click the "ADD TO QUOTE LIST" button
+    And Verify that the ADD TO QUOTE LIST button should be visible and clickable
+    When Click the ADD TO QUOTE LIST button
     Then Verify that the product should be added to the quote list and the quote list should be updated
 
     Examples:

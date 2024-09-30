@@ -58,6 +58,8 @@ public class VintageRugsPage {
     public WebElement searchInputTopOgPage;
     @FindBy(id = "woocommerce-product-search-field-3")
     public WebElement searchInputBottomOgPage;
+    @FindBy(id = "elex-raq-add-sucess-toast")
+    public WebElement productAddedSuccessText;
 
 
 
