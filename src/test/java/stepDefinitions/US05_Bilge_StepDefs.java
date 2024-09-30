@@ -31,7 +31,6 @@ public class US05_Bilge_StepDefs {
     @Then("the {string} category name should be visible")
     public void the_category_name_should_be_visible(String string) {
        String titleSeating = seatingPage.titleOfSeating.getText();
-        System.out.println(titleSeating);
         Assert.assertEquals("SEATING",titleSeating);
 
     }
