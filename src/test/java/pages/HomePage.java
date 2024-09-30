@@ -24,6 +24,14 @@ public class HomePage {
 
     @FindBy(xpath = "//select[@class='search_categories resize-select mb-0']")
     public WebElement searchDropdown;
+    @FindBy(xpath = "//h2[text()='NEW ARRIVALS']")
+    public WebElement newArrivals;
+    @FindBy(xpath = "(//span[text()='PRODUCT CATEGORY'])[2]")
+    public WebElement productCategory;
+    @FindBy(xpath = "(//span[text()='PRODUCT SEARCH'])[2]")
+    public WebElement productSearch;
+    @FindBy(xpath = "//h2[text()='FOLLOW US ON INSTAGRAM']")
+    public WebElement followInstagram;
 
     @FindBy(linkText = "CATALOGUE")
     public WebElement catalogue;

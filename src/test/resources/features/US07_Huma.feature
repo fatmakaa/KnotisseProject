@@ -35,3 +35,50 @@ Feature: User views VINTAGE RUGS category, filters, view details and add to cart
       | Tulu     |
       | Cicim    |
       | Kilims   |
+
+  @US07TC03
+  Scenario Outline: TC03_The product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details of the seating product.
+      And Hover over the "VINTAGE RUGS" category on the homepage
+      And Click on the "<category>" button
+      And Clicks on any product
+      Then Verify that when the user hovers over the product image, it zooms in
+      And Verifies that the product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details
+
+    Examples:
+      | category |
+      | Rugs     |
+      | Tulu     |
+      | Cicim    |
+      | Kilims   |
+
+  @US07TC04
+  Scenario Outline: TC03_The product detail page displays high-resolution images, detailed description, and availability status
+    And Hover over the "VINTAGE RUGS" category on the homepage
+    And Click on the "<category>" button
+    And Clicks on any product
+    Then Verify that the product detail page display sections "New Arrivals", "Product Category", "Product Search", and "Follow us on Instagram"
+    And Verify that the ADD TO QUOTE LIST button should be visible and clickable
+    When Click the ADD TO QUOTE LIST button
+    Then Verify that the product should be added to the quote list and the quote list should be updated
+
+    Examples:
+      | category |
+      | Rugs     |
+      | Tulu     |
+      | Cicim    |
+      | Kilims   |
+
+
+  @US07TC05
+  Scenario Outline: TC05_Verify out of stock message and sections visibility on product detail page
+    And Hover over the "VINTAGE RUGS" category on the homepage
+    And Click on the "<category>" button
+    And Clicks on any product
+    Then Verify that "Description", "Additional Information", "Related products" and "Search" sections are visible
+
+    Examples:
+      | category |
+      | Rugs     |
+      | Tulu     |
+      | Cicim    |
+      | Kilims   |
