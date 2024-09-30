@@ -11,6 +11,8 @@ target/
 *.iws
 *.iml
 *.ipr
+.idea/workspace.xml
+.idea/shelf/Uncommitted_changes_before_Checkout_at_11_09_2024__12_06PM__Changes_.xml
 
 ### Eclipse ###
 .apt_generated
