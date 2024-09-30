@@ -31,6 +31,30 @@ public class HomePage {
     @FindBy(xpath = "//a[@href='https://knotisse.com/new-arrivals/'][1]")
     public WebElement newArrivals;
 
+    @FindBy(xpath = "//a[@href='https://knotisse.com/antique-rugs-turkish-persian/'][1]")
+    public WebElement antiqueRugs;
+
+
+    @FindBy(xpath = "//a[@href='https://knotisse.com/']")
+    public WebElement homePageLink;
+
+
+    @FindBy(xpath = "//h2[@class='uppercase']")
+    public WebElement homePageAssert;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

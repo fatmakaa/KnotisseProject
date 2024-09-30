@@ -15,4 +15,14 @@ public class RandomPage {
 
     @FindBy(xpath = "//*[@class='product-title product_title entry-title']")
     public WebElement titleOfAfterProductSearch;
+
+    @FindBy (id = "yith-wcwl-popup-message")
+    public  WebElement productAddedPopUp;
+
+    @FindBy (xpath ="//a[@class='quick-view quick-view-added'][1]")
+    public  WebElement quickView;
+
+
+
+
 }
