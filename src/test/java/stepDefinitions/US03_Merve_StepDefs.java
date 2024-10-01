@@ -1,25 +1,23 @@
 package stepDefinitions;
 
-import io.cucumber.java.en.Given;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CataloguePage;
 import pages.HomePage;
 import pages.PillowsPage;
 import pages.RandomPage;
-import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
+import utilities.WaitUtils;
 
-import java.time.Duration;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class US03_Merve_StepDefs {
 
@@ -28,12 +26,8 @@ public class US03_Merve_StepDefs {
     RandomPage randomPage = new RandomPage();
     PillowsPage pillowsPage = new PillowsPage();
     Random rnd = new Random();
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-
-    @Given("The user navigates to the related website.")
-    public void the_user_navigates_to_the_related_website() {
-        Driver.getDriver().get(ConfigReader.getProperty("baseUrl"));
-    }
+    WaitUtils waitUtils = new WaitUtils();
+    Select dropdown;
 
     @Then("The user clicks on the search icon.")
     public void the_user_clicks_on_the_search_icon() {
@@ -81,8 +75,8 @@ public class US03_Merve_StepDefs {
         ReusableMethods.click(homePage.searchButtonAfterClickSearchButton);
     }
 
- //   @Then("The user clicks on one of the available options and views the details of the product that opens.")
-  //  public void the_user_clicks_on_one_of_the_available_options_and_views_the_details_of_the_product_that_opens() {
+    //   @Then("The user clicks on one of the available options and views the details of the product that opens.")
+    //  public void the_user_clicks_on_one_of_the_available_options_and_views_the_details_of_the_product_that_opens() {
     //    int randomNumber = 1 + rnd.nextInt(7);
     //        Map<String, String> productCategories = new HashMap<String, String>() {{
     //            put("All", "Authentic"); put("ANTIQUE RUGS", "Antique"); put("KNOTISSE PRODUCTION", "Handmade"); put("SEATING", "Handmade"); put("THROW PILLOWS", "Throw Pillow"); put("UPHOLSTERY", "Upholstery"); put("VINTAGE", "Vintage");
@@ -95,19 +89,20 @@ public class US03_Merve_StepDefs {
 //                homePage.searchButtonAfterClickSearchButton.click();
 //                System.out.println("cataloguePage.searchResultsForText.getText() = " + cataloguePage.searchResultsForText.getText());
 
-  //      for (Map.Entry<String, String> entry : productCategories.entrySet()) {
-  //              if (cataloguePage.searchResultsForText.getText().contains(entry.getKey())) {
-  //                  WebElement randomProduct = Driver.getDriver().findElement(By.xpath("(//a[contains(.,'" + entry.getValue() + "')])[" + randomNumber + "]"));
-  //                  JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-  //                  js.executeScript("arguments[0].click();", randomProduct);
-  //                  System.out.println("randomProduct = " + randomProduct);
-  //              }
-  //          }
-  //      ReusableMethods.wait(5);
-  //      ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
-  //      Assert.assertTrue("The user doesn't view the details of the selected product",
-  //              randomPage.titleOfAfterProductSearch.isDisplayed());
- //   }
+    //      for (Map.Entry<String, String> entry : productCategories.entrySet()) {
+    //              if (cataloguePage.searchResultsForText.getText().contains(entry.getKey())) {
+    //                  WebElement randomProduct = Driver.getDriver().findElement(By.xpath("(//a[contains(.,'" + entry.getValue() + "')])[" + randomNumber + "]"));
+    //                  JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+    //                  js.executeScript("arguments[0].click();", randomProduct);
+    //                  System.out.println("randomProduct = " + randomProduct);
+    //              }
+    //          }
+    //      ReusableMethods.wait(5);
+    //      ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
+    //      Assert.assertTrue("The user doesn't view the details of the selected product",
+    //              randomPage.titleOfAfterProductSearch.isDisplayed());
+    //   }
+
 
     @Then("On the results page, the user sees the total number of search results.")
     public void on_the_results_page_the_user_sees_the_total_number_of_search_results() {
@@ -124,12 +119,14 @@ public class US03_Merve_StepDefs {
         }
     }
 
+
     @Then("The user accesses the details of the selected product.")
     public void the_user_accesses_the_details_of_the_selected_product() {
         ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
         Assert.assertTrue("The user doesn't access the details of the selected product.",
                 randomPage.titleOfAfterProductSearch.isDisplayed());
     }
+
 
     @Then("The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses {string}.")
     public void the_user_sorts_the_products_based_on_their_preference_by_selecting_an_option_from_the_relevance_dropdown_chooses(String string) {
@@ -138,27 +135,44 @@ public class US03_Merve_StepDefs {
         ReusableMethods.click(sortByElement);
     }
 
-    @Then("While on the {string} option, the user clicks on the search button.")
-    public void while_on_the_option_the_user_clicks_on_the_search_button(String string) {
-        Select dropdown = new Select(homePage.searchDropdown);
+
+    @Then("While on the {string}, the user clicks on the search button.")
+    public void whileOnTheTheUserClicksOnTheSearchButton(String option) {
+        dropdown = new Select(homePage.searchDropdown);
         ReusableMethods.wait(6);
-        dropdown.selectByVisibleText(string);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(homePage.searchButtonAfterClickSearchButton));
-        ReusableMethods.click(element);
+        dropdown.selectByVisibleText(option);
+        waitUtils.waitForClickablility(homePage.searchButtonAfterClickSearchButton, 10);
+        ReusableMethods.click(homePage.searchButtonAfterClickSearchButton);
         ReusableMethods.scrollHome();
+
     }
 
-    @Then("The user clicks on any product with the title {string}")
-    public void theUserClicksOnAnyProductWithTheTitle(String title) {
+
+    @Then("The user clicks on any product with the {string}")
+    public void theUserClicksOnAnyProductWithThe(String title) {
         int randomNumber = 1 + rnd.nextInt(8);
         WebElement randomProduct = Driver.getDriver().findElement(By.xpath("(//a[contains(.,'" + title + "')])[" + randomNumber + "]"));
-        System.out.println("randomProduct = " + randomProduct);
         ReusableMethods.wait(6);
         try {
-            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(randomProduct));
-            ReusableMethods.click(element);
+            waitUtils.waitForClickablility(randomProduct, 10);
+            ReusableMethods.click(randomProduct);
         } catch (StaleElementReferenceException e) {
 
+        }
+        ReusableMethods.wait(5);
+    }
+
+
+    @And("The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses {string}, {string}, {string}, {string}.")
+    public void theUserSortsTheProductsBasedOnTheirPreferenceBySelectingAnOptionFromTheRelevanceDropdownChooses(String defaultSorting, String sortByPopularity, String sortByAverageRating, String sortByLatest) {
+        String[] sortingOptions = {defaultSorting, sortByPopularity, sortByAverageRating, sortByLatest};
+        int randomIndex = rnd.nextInt(sortingOptions.length);
+        String randomSelectedOption = sortingOptions[randomIndex];
+        for (WebElement randomSortingOption : randomPage.randomSortingDropdown) {
+            if (randomSortingOption.getText().equalsIgnoreCase(randomSelectedOption)) {
+                ReusableMethods.click(randomSortingOption);
+                break;
+            }
         }
         ReusableMethods.wait(5);
     }

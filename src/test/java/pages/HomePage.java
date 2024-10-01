@@ -13,7 +13,6 @@ public class HomePage {
 
     public HomePage(){
         PageFactory.initElements(Driver.getDriver(),this);
-
     }
 
     @FindBy(xpath = "(//a[@href='#search-lightbox'])[1]")
