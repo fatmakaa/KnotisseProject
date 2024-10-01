@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
+
 public class RandomPage {
 
     public RandomPage(){
@@ -22,7 +24,6 @@ public class RandomPage {
     @FindBy (xpath ="//a[@class='quick-view quick-view-added'][1]")
     public  WebElement quickView;
 
-
-
-
+    @FindBy(xpath = "//select[contains(@class, 'orderby')]")
+    public List<WebElement> randomSortingDropdown;
 }
