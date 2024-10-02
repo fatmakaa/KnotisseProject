@@ -13,7 +13,6 @@ public class HomePage {
 
     public HomePage(){
         PageFactory.initElements(Driver.getDriver(),this);
-
     }
 
     @FindBy(xpath = "(//a[@href='#search-lightbox'])[1]")
@@ -25,14 +24,22 @@ public class HomePage {
     @FindBy(xpath = "//select[@class='search_categories resize-select mb-0']")
     public WebElement searchDropdown;
 
+    @FindBy(id = "woocommerce-product-search-field-0")
+    public WebElement searchBox;
+
     @FindBy(linkText = "CATALOGUE")
     public WebElement catalogue;
 
     @FindBy(xpath = "//a[@href='https://knotisse.com/new-arrivals/'][1]")
     public WebElement newArrivals;
 
+    @FindBy(xpath = "//a[@href='https://knotisse.com/antique-rugs-turkish-persian/'][1]")
+    public WebElement antiqueRugs;
 
+    @FindBy(xpath = "//a[@href='https://knotisse.com/']")
+    public WebElement homePageLink;
 
-
+    @FindBy(xpath = "//h2[@class='uppercase']")
+    public WebElement homePageAssert;
 
 }
