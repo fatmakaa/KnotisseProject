@@ -20,4 +20,8 @@ public class RandomPage {
 
     @FindBy(xpath = "//select[contains(@class, 'orderby')]")
     public List<WebElement> randomSortingDropdown;
+
+    @FindBy(xpath = "//div[contains(@class, 'box-text box-text-products')]")
+    public List<WebElement> randomProductTitleList;
+
 }
