@@ -5,6 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="" />
+    <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_23_09_2024,_10_15 PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_23_09_2024,_10_16 PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_23_09_2024__10_15PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_23_09_2024__10_16PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pages/RandomPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/RandomPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/runners/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/runners/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US14_Fatma_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US14_Fatma_StepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/utilities/ReusableMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utilities/ReusableMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/features/US14_Fatma.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US14_Fatma.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-output/embedded1.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-output/embedded2.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-output/embedded3.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-output/embedded4.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-output/embedded5.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-output/embedded6.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded6.png" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,7 +199,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
       <list>
         <item itemvalue="JUnit.Runner" />
         <item itemvalue="Cucumber Java.Scenario: The user can search using the differet options from the dropdown without registering, access the products and product details on the resulting page, and see the total number of results." />
@@ -188,7 +206,6 @@
         <item itemvalue="Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results." />
         <item itemvalue="Cucumber Java.Scenario: The user can perform a search using the 'THROW PILLOWS' option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed." />
       </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

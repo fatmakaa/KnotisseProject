@@ -1,8 +1,6 @@
 @US14
 Feature: US014
 
-  Background:
-    When user navigates to the relevant website.
 
   @US014_TC01
   Scenario: When the user clicks on the Instagram social media icon located in the top right corner of the home page, they should be redirected to the relevant account.

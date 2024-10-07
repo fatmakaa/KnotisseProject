@@ -26,4 +26,16 @@ public class RandomPage {
 
     @FindBy(xpath = "//select[contains(@class, 'orderby')]")
     public List<WebElement> randomSortingDropdown;
+
+    @FindBy (xpath ="(//span[@class='x1lliihq x193iq5w x6ikm8r x10wlt62 xlyipyv xuxw1ft'])[1]")
+    public  WebElement knotisseInstagramAssert;
+
+    @FindBy (xpath ="//div[@data-test-id='profile-name']")
+    public  WebElement knotissePinterestAssert;
+
+    @FindBy (xpath ="//span[@class='yt-core-attributed-string yt-core-attributed-string--white-space-pre-wrap'][1]")
+    public  WebElement knotisseYoutubeAssert;
+
+
+
 }
