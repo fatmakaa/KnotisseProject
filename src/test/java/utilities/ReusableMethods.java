@@ -75,6 +75,7 @@ public class ReusableMethods {
     public static void window(int num) {
         Driver.getDriver().switchTo().window(Driver.getDriver().getWindowHandles().toArray()[num].toString());
     }
+
     //EXPLICIT WAIT METHODS
 
     //Visible Wait
@@ -171,5 +172,24 @@ public class ReusableMethods {
             }
         }
     }
+
+    //========Switching Window=====//
+    public static void switchToWindow(String targetTitle) {
+        String origin = Driver.getDriver().getWindowHandle();
+        for (String handle : Driver.getDriver().getWindowHandles()) {
+            Driver.getDriver().switchTo().window(handle);
+            if (Driver.getDriver().getTitle().equals(targetTitle)) {
+                return;
+            }
+        }
+      //  Driver.getDriver().switchTo().window(origin);
+    }
+
+
+
+
+
+
+
 
 }

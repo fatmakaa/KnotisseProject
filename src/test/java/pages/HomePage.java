@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-import java.util.List;
 
 public class HomePage {
 
@@ -38,9 +37,30 @@ public class HomePage {
     @FindBy(xpath = "//a[@href='https://knotisse.com/']")
     public WebElement homePageLink;
 
-
     @FindBy(xpath = "//h2[@class='uppercase']")
     public WebElement homePageAssert;
+
+    @FindBy(xpath = "//i[@class='icon-instagram'][1]")
+    public WebElement firstInstagramIcon;
+
+    @FindBy(xpath = "//a[@href='https://www.pinterest.com/knotisse'][1]")
+    public WebElement firstPinterestIcon;
+    @FindBy(xpath = "//a[@href='https://www.youtube.com/@KNOTISSE_FineWeavings'][1]")
+    public WebElement firstYoutubeIcon;
+
+    @FindBy(xpath = "//i[@class='icon-facebook'][1]")
+    public WebElement facebookIconFooter;
+
+    @FindBy(xpath = "(//i[@class='icon-instagram'])[2]")
+    public WebElement instagramIconFooter;
+
+    @FindBy(xpath = "(//a[@href='https://www.youtube.com/@KNOTISSE_FineWeavings'])[2]")
+    public WebElement youtubeIconFooter;
+
+    @FindBy(xpath = "//a[@href='https://www.pinterest.com/knotisse/'][1]")
+    public WebElement pinterestIconFooter;
+
+
 
 
 
