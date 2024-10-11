@@ -73,18 +73,17 @@ public class US03_Merve_StepDefs {
 
     @Then("The user clicks on one of the available options and views the details of the product that opens.")
     public void the_user_clicks_on_one_of_the_available_options_and_views_the_details_of_the_product_that_opens() {
-        int randomIndex = rnd.nextInt(4);
-
+        int randomIndex = 1 + rnd.nextInt(10);
+        WebElement randomProduct = Driver.getDriver().findElement(By.xpath(("(" + "//*[contains(@class, 'quick-view quick-view-added')])") + "[" + randomIndex + "]"));
         try {
-            WaitUtils.waitForClickablility(randomPage.randomProductTitleList.get(randomIndex), 10);
-            ReusableMethods.click(randomPage.randomProductTitleList.get(randomIndex));
+            ReusableMethods.click(randomProduct);
+            ReusableMethods.wait(20);
         } catch (StaleElementReferenceException e) {
-
         }
 
-        ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
+        ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearchInPopUp, 10);
         Assert.assertTrue("The user doesn't view the details of the selected product",
-                randomPage.titleOfAfterProductSearch.isDisplayed());
+                randomPage.titleOfAfterProductSearchInPopUp.isDisplayed());
     }
 
 

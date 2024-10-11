@@ -18,6 +18,9 @@ public class RandomPage {
     @FindBy(xpath = "//*[@class='product-title product_title entry-title']")
     public WebElement titleOfAfterProductSearch;
 
+    @FindBy(xpath = "(//*[@class='plain'])[1]")
+    public WebElement titleOfAfterProductSearchInPopUp;
+
     @FindBy(xpath = "//select[contains(@class, 'orderby')]")
     public List<WebElement> randomSortingDropdown;
 
