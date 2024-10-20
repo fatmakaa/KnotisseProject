@@ -27,4 +27,8 @@ public class HomePage {
     @FindBy(id = "woocommerce-product-search-field-0")
     public WebElement searchBox;
 
+    @FindBy(xpath = "(//a[@class='nav-top-link'])[1]")
+    public WebElement contactButton;
+
+
 }
