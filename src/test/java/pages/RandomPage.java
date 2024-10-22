@@ -18,6 +18,9 @@ public class RandomPage {
     @FindBy(xpath = "//*[@class='product-title product_title entry-title']")
     public WebElement titleOfAfterProductSearch;
 
+    @FindBy(xpath = "(//*[@class='plain'])[1]")
+    public WebElement titleOfAfterProductSearchInPopUp;
+
     @FindBy (id = "yith-wcwl-popup-message")
     public  WebElement productAddedPopUp;
 
@@ -26,6 +29,9 @@ public class RandomPage {
 
     @FindBy(xpath = "//select[contains(@class, 'orderby')]")
     public List<WebElement> randomSortingDropdown;
+
+    @FindBy(xpath = "//div[contains(@class, 'box-text box-text-products')]")
+    public List<WebElement> randomProductTitleList;
 
     @FindBy (xpath ="(//span[@class='x1lliihq x193iq5w x6ikm8r x10wlt62 xlyipyv xuxw1ft'])[1]")
     public  WebElement knotisseInstagramAssert;

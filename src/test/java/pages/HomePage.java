@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
 
 public class HomePage {
 
@@ -25,6 +26,10 @@ public class HomePage {
 
     @FindBy(id = "woocommerce-product-search-field-0")
     public WebElement searchBox;
+
+    @FindBy(xpath = "(//a[@class='nav-top-link'])[1]")
+    public WebElement contactButton;
+
 
     @FindBy(linkText = "CATALOGUE")
     public WebElement catalogue;
@@ -60,8 +65,5 @@ public class HomePage {
 
     @FindBy(xpath = "//a[@href='https://www.pinterest.com/knotisse/'][1]")
     public WebElement pinterestIconFooter;
-
-
-
 
 }
