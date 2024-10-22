@@ -29,7 +29,7 @@ public class KnotisseComPage {
     @FindBy(xpath = "//textarea[@id='wpforms-5134-field_2']")
     public WebElement messageBoxInContactPage;
 
-    @FindBy(xpath = "//input[@id='wpforms-5134-field_6_1']")
+    @FindBy(xpath = "(//input[@id='wpforms-5134-field_6_1'])[1]")
     public WebElement checkBoxInContactPage;
 
     @FindBy(id = "wpforms-submit-5134")

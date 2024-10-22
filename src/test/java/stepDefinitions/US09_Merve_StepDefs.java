@@ -4,10 +4,11 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.interactions.Actions;
 import pages.HomePage;
 import pages.KnotisseComPage;
-import utilities.Driver;
+import utilities.ActionsUtils;
+import utilities.ReusableMethods;
+import utilities.WaitUtils;
 
 
 public class US09_Merve_StepDefs {
@@ -56,13 +57,14 @@ public class US09_Merve_StepDefs {
     @Then("It is verified that a message can be sent by entering the name, email, phone number, and message details into the contact form.")
     public void it_is_verified_that_a_message_can_be_sent_by_entering_the_name_email_phone_number_and_message_details_into_the_contact_form() {
 
-        Actions actions = new Actions(Driver.getDriver());
-        actions.sendKeys(knotisseComPage.nameBoxInContactPage, faker.name().firstName())
-                .sendKeys(knotisseComPage.surnameBoxInContactPage, faker.name().lastName())
-                .sendKeys(knotisseComPage.emailBoxInContactPage, faker.internet().emailAddress())
-                .sendKeys(knotisseComPage.phoneBoxInContactPage, faker.phoneNumber().phoneNumber())
-                .sendKeys(knotisseComPage.messageBoxInContactPage, faker.lorem().paragraph()).perform();
+        ActionsUtils.actionsSendKeys(knotisseComPage.nameBoxInContactPage, faker.name().firstName());
+        ActionsUtils.actionsSendKeys(knotisseComPage.surnameBoxInContactPage, faker.name().lastName());
+        ActionsUtils.actionsSendKeys(knotisseComPage.emailBoxInContactPage, faker.internet().emailAddress());
+        ActionsUtils.actionsSendKeys(knotisseComPage.phoneBoxInContactPage, faker.phoneNumber().phoneNumber());
+        ActionsUtils.actionsSendKeys(knotisseComPage.messageBoxInContactPage, faker.lorem().paragraph());
         Assert.assertTrue(knotisseComPage.checkBoxInContactPage.isEnabled());
+        ReusableMethods.scroll(knotisseComPage.submitButtonInContactPage);
+        WaitUtils.waitForClickablility(knotisseComPage.submitButtonInContactPage, 5);
         Assert.assertTrue(knotisseComPage.submitButtonInContactPage.isEnabled());
     }
 

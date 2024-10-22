@@ -21,10 +21,27 @@ public class RandomPage {
     @FindBy(xpath = "(//*[@class='plain'])[1]")
     public WebElement titleOfAfterProductSearchInPopUp;
 
+    @FindBy (id = "yith-wcwl-popup-message")
+    public  WebElement productAddedPopUp;
+
+    @FindBy (xpath ="//a[@class='quick-view quick-view-added'][1]")
+    public  WebElement quickView;
+
     @FindBy(xpath = "//select[contains(@class, 'orderby')]")
     public List<WebElement> randomSortingDropdown;
 
     @FindBy(xpath = "//div[contains(@class, 'box-text box-text-products')]")
     public List<WebElement> randomProductTitleList;
+
+    @FindBy (xpath ="(//span[@class='x1lliihq x193iq5w x6ikm8r x10wlt62 xlyipyv xuxw1ft'])[1]")
+    public  WebElement knotisseInstagramAssert;
+
+    @FindBy (xpath ="//div[@data-test-id='profile-name']")
+    public  WebElement knotissePinterestAssert;
+
+    @FindBy (xpath ="//span[@class='yt-core-attributed-string yt-core-attributed-string--white-space-pre-wrap'][1]")
+    public  WebElement knotisseYoutubeAssert;
+
+
 
 }
