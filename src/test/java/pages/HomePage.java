@@ -11,8 +11,8 @@ import java.util.List;
 
 public class HomePage {
 
-    public HomePage(){
-        PageFactory.initElements(Driver.getDriver(),this);
+    public HomePage() {
+        PageFactory.initElements(Driver.getDriver(), this);
     }
 
     @FindBy(xpath = "(//a[@href='#search-lightbox'])[1]")
@@ -24,47 +24,41 @@ public class HomePage {
     @FindBy(xpath = "//select[@class='search_categories resize-select mb-0']")
     public WebElement searchDropdown;
 
-    @FindBy(id = "woocommerce-product-search-field-0")
-    public WebElement searchBox;
-
     @FindBy(xpath = "(//a[@class='nav-top-link'])[1]")
     public WebElement contactButton;
 
+    @FindBy(xpath = "//button[@class='woocommerce-button button woocommerce-form-login__submit']")
+    public WebElement loginInPopup;
 
-    @FindBy(linkText = "CATALOGUE")
-    public WebElement catalogue;
+    @FindBy(id = "username")
+    public WebElement usernameInLoginPopup;
 
-    @FindBy(xpath = "//a[@href='https://knotisse.com/new-arrivals/'][1]")
-    public WebElement newArrivals;
+    @FindBy(id = "password")
+    public WebElement passwordInLoginPopup;
 
-    @FindBy(xpath = "//a[@href='https://knotisse.com/antique-rugs-turkish-persian/'][1]")
-    public WebElement antiqueRugs;
+    @FindBy(xpath = "(//a[@href='https://knotisse.com/my-account/'])[1]")
+    public WebElement loginRegisterIcon;
 
-    @FindBy(xpath = "//a[@href='https://knotisse.com/']")
-    public WebElement homePageLink;
+    @FindBy(xpath = "(//span[@class='header-account-title'])[1]")
+    public WebElement myAccountIcon;
 
-    @FindBy(xpath = "//h2[@class='uppercase']")
-    public WebElement homePageAssert;
+    @FindBy(xpath = "(//a[@href='https://knotisse.com/my-account/edit-account/'])[2]")
+    public WebElement accountDetailsMenu;
 
-    @FindBy(xpath = "//i[@class='icon-instagram'][1]")
-    public WebElement firstInstagramIcon;
+    @FindBy(xpath = "//input[@id='account_first_name']")
+    public WebElement firstNameBoxInAccountDetailsMenu;
 
-    @FindBy(xpath = "//a[@href='https://www.pinterest.com/knotisse'][1]")
-    public WebElement firstPinterestIcon;
-    @FindBy(xpath = "//a[@href='https://www.youtube.com/@KNOTISSE_FineWeavings'][1]")
-    public WebElement firstYoutubeIcon;
+    @FindBy(xpath = "//input[@id='account_last_name']")
+    public WebElement lastNameBoxInAccountDetailsMenu;
 
-    @FindBy(xpath = "//i[@class='icon-facebook'][1]")
-    public WebElement facebookIconFooter;
+    @FindBy(xpath = "//input[@id='account_display_name']")
+    public WebElement displayNameBoxInAccountDetailsMenu;
 
-    @FindBy(xpath = "(//i[@class='icon-instagram'])[2]")
-    public WebElement instagramIconFooter;
+    @FindBy(xpath = "//button[@name='save_account_details']")
+    public WebElement saveChangesButtonInAccountDetailsMenu;
 
-    @FindBy(xpath = "(//a[@href='https://www.youtube.com/@KNOTISSE_FineWeavings'])[2]")
-    public WebElement youtubeIconFooter;
-
-    @FindBy(xpath = "//a[@href='https://www.pinterest.com/knotisse/'][1]")
-    public WebElement pinterestIconFooter;
+    @FindBy(xpath = "//div[@class='message-container container success-color medium-text-center']")
+    public WebElement accountDetailsChangedSuccessfullyText;
 
 
 

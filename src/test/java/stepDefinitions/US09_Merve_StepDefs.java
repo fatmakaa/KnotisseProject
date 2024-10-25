@@ -67,6 +67,4 @@ public class US09_Merve_StepDefs {
         WaitUtils.waitForClickablility(knotisseComPage.submitButtonInContactPage, 5);
         Assert.assertTrue(knotisseComPage.submitButtonInContactPage.isEnabled());
     }
-
-
 }
