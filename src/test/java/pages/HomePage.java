@@ -60,7 +60,14 @@ public class HomePage {
     @FindBy(xpath = "//div[@class='message-container container success-color medium-text-center']")
     public WebElement accountDetailsChangedSuccessfullyText;
 
+    @FindBy(xpath = "(//input[@id='password_current'])[1]")
+    public WebElement currentPasswordBoxInAccountDetailsMenu;
 
+    @FindBy(xpath = "(//input[@id='password_1'])[1]")
+    public WebElement newPasswordBoxInAccountDetailsMenu;
+
+    @FindBy(xpath = "(//input[@id='password_2'])[1]")
+    public WebElement confirmNewPasswordBoxInAccountDetailsMenu;
 
 
 }

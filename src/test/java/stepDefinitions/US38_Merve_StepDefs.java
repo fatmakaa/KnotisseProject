@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
@@ -39,9 +40,9 @@ public class US38_Merve_StepDefs {
     @Then("The user fills in the required fields First name, Last name, Email address")
     public void the_user_fills_in_the_required_fields_first_name_last_name_email_address() {
         homePage.firstNameBoxInAccountDetailsMenu.clear();
-        homePage.firstNameBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("firstNameForAccountDetailsMenu"));
+        homePage.firstNameBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("validFirstNameForAccountDetailsMenu"));
         homePage.lastNameBoxInAccountDetailsMenu.clear();
-        homePage.lastNameBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("lastNameForAccountDetailsMenu"));
+        homePage.lastNameBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("validLastNameForAccountDetailsMenu"));
         homePage.displayNameBoxInAccountDetailsMenu.clear();
         homePage.displayNameBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("displayNameForAccountDetailsMenu"));
     }
@@ -55,5 +56,21 @@ public class US38_Merve_StepDefs {
     @Then("The user should see the message {string}")
     public void the_user_should_see_the_message(String relatedText) {
         Assert.assertEquals(homePage.accountDetailsChangedSuccessfullyText.getText(), relatedText);
+    }
+
+    @Then("In the First Name and Last Name fields, the user enters digits")
+    public void inTheFirstNameAndLastNameFieldsTheUserEntersDigits() {
+        homePage.firstNameBoxInAccountDetailsMenu.clear();
+        homePage.firstNameBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("invalidFirstNameForAccountDetailsMenu"));
+        homePage.lastNameBoxInAccountDetailsMenu.clear();
+        homePage.lastNameBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("invalidLastNameForAccountDetailsMenu"));
+        homePage.currentPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("passwordForRegister"));
+        homePage.newPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("passwordForRegister"));
+        homePage.confirmNewPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("passwordForRegister"));
+    }
+
+    @And("The system should not accept the information change, as digits are not allowed in the First Name and Last Name fields")
+    public void theSystemShouldNotAcceptTheInformationChangeAsDigitsAreNotAllowedInTheFirstNameAndLastNameFields() {
+        Assert.assertFalse("'Account details changed successfully.' text displayed", homePage.accountDetailsChangedSuccessfullyText.isDisplayed());
     }
 }
