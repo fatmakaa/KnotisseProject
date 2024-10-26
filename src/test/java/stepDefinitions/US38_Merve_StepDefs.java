@@ -29,7 +29,18 @@ public class US38_Merve_StepDefs {
 
     @Then("The user clicks on My Account")
     public void theUserClicksOnMyAccount() {
-        homePage.myAccountIcon.click();
+        if (homePage.myAccountIcon.isDisplayed()) {
+            homePage.myAccountIcon.click();
+
+        }else {
+            homePage.loginRegisterIcon.click();
+            homePage.usernameInLoginPopup.clear();
+            homePage.usernameInLoginPopup.sendKeys(ConfigReader.getProperty("emailForRegister"));
+            homePage.passwordInLoginPopup.clear();
+            homePage.passwordInLoginPopup.sendKeys(ConfigReader.getProperty("passwordForRegister"));
+            homePage.loginInPopup.click();
+            homePage.myAccountIcon.click();
+        }
     }
 
     @Then("The user clicks on Account Details")
@@ -72,5 +83,20 @@ public class US38_Merve_StepDefs {
     @And("The system should not accept the information change, as digits are not allowed in the First Name and Last Name fields")
     public void theSystemShouldNotAcceptTheInformationChangeAsDigitsAreNotAllowedInTheFirstNameAndLastNameFields() {
         Assert.assertFalse("'Account details changed successfully.' text displayed", homePage.accountDetailsChangedSuccessfullyText.isDisplayed());
+    }
+
+    @Then("In the Password Change section, they enter their Current Password.")
+    public void inThePasswordChangeSectionTheyEnterTheirCurrentPassword() {
+        homePage.currentPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("passwordForRegister"));
+    }
+
+    @Then("Next, they enter a New Password in the corresponding field.")
+    public void nextTheyEnterANewPasswordInTheCorrespondingField() {
+        homePage.newPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("passwordForRegister"));
+    }
+
+    @Then("In the Confirm New Password field, they enter the same new password again.")
+    public void inTheConfirmNewPasswordFieldTheyEnterTheSameNewPasswordAgain() {
+        homePage.confirmNewPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("passwordForRegister"));
     }
 }

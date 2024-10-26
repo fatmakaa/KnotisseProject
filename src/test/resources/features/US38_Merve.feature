@@ -20,4 +20,10 @@ Feature: The user should be able to successfully update their information.
     Then The user clicks on Save changes
     And  The system should not accept the information change, as digits are not allowed in the First Name and Last Name fields
 
-
+  @US38_TC03
+  Scenario: The user has successfully changed their password.
+    Then In the Password Change section, they enter their Current Password.
+    Then Next, they enter a New Password in the corresponding field.
+    Then In the Confirm New Password field, they enter the same new password again.
+    Then The user clicks on Save changes
+    And The user should see the message "Account details changed successfully."
