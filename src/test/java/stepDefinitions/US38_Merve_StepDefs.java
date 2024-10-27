@@ -32,7 +32,7 @@ public class US38_Merve_StepDefs {
         if (homePage.myAccountIcon.isDisplayed()) {
             homePage.myAccountIcon.click();
 
-        }else {
+        } else {
             homePage.loginRegisterIcon.click();
             homePage.usernameInLoginPopup.clear();
             homePage.usernameInLoginPopup.sendKeys(ConfigReader.getProperty("emailForRegister"));
@@ -98,5 +98,25 @@ public class US38_Merve_StepDefs {
     @Then("In the Confirm New Password field, they enter the same new password again.")
     public void inTheConfirmNewPasswordFieldTheyEnterTheSameNewPasswordAgain() {
         homePage.confirmNewPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("passwordForRegister"));
+    }
+
+    @Then("User enters the current password in the Current Password field, but enters it incorrectly.")
+    public void userEntersTheCurrentPasswordInTheCurrentPasswordFieldButEntersItIncorrectly() {
+        homePage.currentPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("invalidPasswordForRegister"));
+    }
+
+    @Then("User enters a new password in the New Password field.")
+    public void userEntersANewPasswordInTheNewPasswordField() {
+        homePage.newPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("validNewPassword"));
+    }
+
+    @Then("User confirms the new password by entering it again in the Confirm New Password field.")
+    public void userConfirmsTheNewPasswordByEnteringItAgainInTheConfirmNewPasswordField() {
+        homePage.confirmNewPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("validNewPassword"));
+    }
+
+    @And("System displays an error message saying {string}")
+    public void systemDisplaysAnErrorMessageSaying(String relatedText) {
+        Assert.assertEquals(homePage.yourCurrentPasswordIsIncorrectText.getText(), relatedText);
     }
 }

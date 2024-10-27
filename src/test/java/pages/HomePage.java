@@ -60,6 +60,9 @@ public class HomePage {
     @FindBy(xpath = "//div[@class='message-container container success-color medium-text-center']")
     public WebElement accountDetailsChangedSuccessfullyText;
 
+    @FindBy(xpath = "//div[@class='message-container container alert-color medium-text-center']")
+    public WebElement yourCurrentPasswordIsIncorrectText;
+
     @FindBy(xpath = "(//input[@id='password_current'])[1]")
     public WebElement currentPasswordBoxInAccountDetailsMenu;
 

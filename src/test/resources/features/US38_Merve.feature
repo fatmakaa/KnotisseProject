@@ -27,3 +27,11 @@ Feature: The user should be able to successfully update their information.
     Then In the Confirm New Password field, they enter the same new password again.
     Then The user clicks on Save changes
     And The user should see the message "Account details changed successfully."
+
+  @US38_TC04
+  Scenario: When a user enters their current password incorrectly, any changes should not be saved.
+    Then User enters the current password in the Current Password field, but enters it incorrectly.
+    Then User enters a new password in the New Password field.
+    Then User confirms the new password by entering it again in the Confirm New Password field.
+    Then The user clicks on Save changes
+    And System displays an error message saying "Your current password is incorrect."
