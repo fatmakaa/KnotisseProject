@@ -5,25 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_10_2024_10_35_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_10_2024_10_35__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_10_2024_10_36_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_10_2024_10_36__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_10_2024_17_12_[Changes]/embedded2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_10_2024_17_12_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_10_2024_17_12__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/pages/KnotisseComPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US09_Merve_StepDefs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_10_2024_15_24_[Changes]/embedded1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_10_2024_15_24_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_10_2024_15_24__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_10_2024_15_28_[Changes]/embedded1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_10_2024_15_28_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_10_2024_15_28_[Changes]1/embedded1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_10_2024_15_28_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_10_2024_15_28__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_10_2024_15_28__Changes_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_10_2024_15_26_[Changes]/embedded1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_10_2024_15_26_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_10_2024_15_26__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US38_Merve_StepDefs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/features/US38_Merve.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_10_2024_10_35_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_10_2024_10_35__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_10_2024_10_36_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_10_2024_10_36__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_10_2024_17_12_[Changes]/embedded2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_10_2024_17_12_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_10_2024_17_12__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration.properties" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pages/RandomPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/RandomPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/runners/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/runners/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US03_Merve_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US03_Merve_StepDefs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US06_Sümeyye_StepDefs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/utilities/ActionsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utilities/ActionsUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/US09_Merve.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US09_Merve.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US09_Merve_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US09_Merve_StepDefs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test-output/embedded1.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded1.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,35 +79,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-    &quot;keyToString&quot;: {
-    &quot;Cucumber Java.Feature: US03_Merve.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user can perform a search using the \&quot;THROW PILLOWS\&quot; option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user can perform a search using the 'KNOTISSE PRODUCTION' option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user can perform a search using the 'THROW PILLOWS' option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed..executor&quot;: &quot;Debug&quot;,
-    &quot;Cucumber Java.Scenario: The user can perform a search using the 'UPHOLSTERY' option from the dropdown without registering, view the products and their details on the resulting page, and see the total number of results..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user can search using the 'VINTAGE' option from the dropdown without registering, access the products and product details on the resulting page, and see the total number of results..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user can search using the differet options from the dropdown without registering, access the products and product details on the resulting page, and see the total number of results..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user performs a search using the \&quot;KNOTISSE PRODUCTION\&quot; option without registering, accesses the product results and details, views the total number of results, and sorts the products by rating..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user should be able to access the contact information by clicking the \&quot;Contact\&quot; link at the top of the page..executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Scenario: The user should be able to apply filters to their searches made through the dropdown without registering..executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.Runner.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/humai/IdeaProjects/KnotisseProject&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3137931&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
-    }
-    }</component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Cucumber Java.Feature: US03_Merve.executor": "Run",
+    "Cucumber Java.Scenario: The user can perform a search using the \"THROW PILLOWS\" option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed..executor": "Run",
+    "Cucumber Java.Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results..executor": "Run",
+    "Cucumber Java.Scenario: The user can perform a search using the 'KNOTISSE PRODUCTION' option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed..executor": "Run",
+    "Cucumber Java.Scenario: The user can perform a search using the 'THROW PILLOWS' option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed..executor": "Debug",
+    "Cucumber Java.Scenario: The user can perform a search using the 'UPHOLSTERY' option from the dropdown without registering, view the products and their details on the resulting page, and see the total number of results..executor": "Run",
+    "Cucumber Java.Scenario: The user can search using the 'VINTAGE' option from the dropdown without registering, access the products and product details on the resulting page, and see the total number of results..executor": "Run",
+    "Cucumber Java.Scenario: The user can search using the differet options from the dropdown without registering, access the products and product details on the resulting page, and see the total number of results..executor": "Run",
+    "Cucumber Java.Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results..executor": "Run",
+    "Cucumber Java.Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results.executor": "Run",
+    "Cucumber Java.Scenario: The user performs a search using the \"KNOTISSE PRODUCTION\" option without registering, accesses the product results and details, views the total number of results, and sorts the products by rating..executor": "Run",
+    "Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results..executor": "Run",
+    "Cucumber Java.Scenario: The user should be able to access the contact information by clicking the \"Contact\" link at the top of the page..executor": "Run",
+    "Cucumber Java.Scenario: The user should be able to apply filters to their searches made through the dropdown without registering..executor": "Run",
+    "JUnit.Runner.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Merging master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/humai/IdeaProjects/KnotisseProject",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3137931",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="stepDefinitions" />
@@ -197,19 +204,6 @@
       <option name="PACKAGE_NAME" value="runners" />
       <option name="MAIN_CLASS_NAME" value="runners.Runner" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="KnotisseProject" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="KnotisseProject" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

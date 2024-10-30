@@ -11,8 +11,8 @@ import java.util.List;
 
 public class HomePage {
 
-    public HomePage() {
-        PageFactory.initElements(Driver.getDriver(), this);
+    public HomePage(){
+        PageFactory.initElements(Driver.getDriver(),this);
     }
 
     @FindBy(xpath = "(//a[@href='#search-lightbox'])[1]")
@@ -30,6 +30,11 @@ public class HomePage {
     @FindBy(xpath = "(//a[@class='nav-top-link'])[1]")
     public WebElement contactButton;
 
+    @FindBy(xpath = "//button[@class='woocommerce-button button woocommerce-form-login__submit']")
+    public WebElement loginInPopup;
+
+    @FindBy(id = "username")
+    public WebElement usernameInLoginPopup;
     @FindBy(linkText = "CATALOGUE")
     public WebElement catalogue;
 
@@ -48,6 +53,29 @@ public class HomePage {
     @FindBy(xpath = "//i[@class='icon-instagram'][1]")
     public WebElement firstInstagramIcon;
 
+    @FindBy(xpath = "//input[@id='account_last_name']")
+    public WebElement lastNameBoxInAccountDetailsMenu;
+
+    @FindBy(xpath = "//input[@id='account_display_name']")
+    public WebElement displayNameBoxInAccountDetailsMenu;
+
+    @FindBy(xpath = "//button[@name='save_account_details']")
+    public WebElement saveChangesButtonInAccountDetailsMenu;
+
+    @FindBy(xpath = "//div[@class='message-container container success-color medium-text-center']")
+    public WebElement accountDetailsChangedSuccessfullyText;
+
+    @FindBy(xpath = "//div[@class='message-container container alert-color medium-text-center']")
+    public WebElement yourCurrentPasswordIsIncorrectText;
+
+    @FindBy(xpath = "(//input[@id='password_current'])[1]")
+    public WebElement currentPasswordBoxInAccountDetailsMenu;
+
+    @FindBy(xpath = "(//input[@id='password_1'])[1]")
+    public WebElement newPasswordBoxInAccountDetailsMenu;
+
+    @FindBy(xpath = "(//input[@id='password_2'])[1]")
+    public WebElement confirmNewPasswordBoxInAccountDetailsMenu;
     @FindBy(xpath = "//a[@href='https://www.pinterest.com/knotisse'][1]")
     public WebElement firstPinterestIcon;
     @FindBy(xpath = "//a[@href='https://www.youtube.com/@KNOTISSE_FineWeavings'][1]")
@@ -80,6 +108,21 @@ public class HomePage {
     public WebElement passwordTextBox;
     @FindBy(xpath = "(//button[@name='login'])[1]")
     public WebElement logInButton;
+
+    @FindBy(id = "password")
+    public WebElement passwordInLoginPopup;
+
+    @FindBy(xpath = "(//a[@href='https://knotisse.com/my-account/'])[1]")
+    public WebElement loginRegisterIcon;
+
+    @FindBy(xpath = "(//span[@class='header-account-title'])[1]")
+    public WebElement myAccountIcon;
+
+    @FindBy(xpath = "(//a[@href='https://knotisse.com/my-account/edit-account/'])[2]")
+    public WebElement accountDetailsMenu;
+
+    @FindBy(xpath = "//input[@id='account_first_name']")
+    public WebElement firstNameBoxInAccountDetailsMenu;
 
 
 }
