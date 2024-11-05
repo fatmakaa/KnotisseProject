@@ -72,5 +72,8 @@ public class HomePage {
     @FindBy(xpath = "(//input[@id='password_2'])[1]")
     public WebElement confirmNewPasswordBoxInAccountDetailsMenu;
 
+    @FindBy(xpath = "//*[@class='woocommerce-password-strength bad']")
+    public WebElement underThePasswordBoxTextInAccountDetailsMenu;
+
 
 }

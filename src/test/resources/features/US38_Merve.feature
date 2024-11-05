@@ -35,3 +35,27 @@ Feature: The user should be able to successfully update their information.
     Then User confirms the new password by entering it again in the Confirm New Password field.
     Then The user clicks on Save changes
     And System displays an error message saying "Your current password is incorrect."
+
+  @US38_TC05
+  Scenario: If the user enters incorrect data in the "confirm new password" field, the change should not be saved.
+    Then In the Password Change section, they enter their Current Password.
+    Then Next, they enter a New Password in the corresponding field.
+    Then In the Confirm New Password field, user enters a different password.
+    Then The user clicks on Save changes
+    And System displays an error message saying "New passwords do not match."
+
+  @US38_TC06
+  Scenario: If the user leaves the "confirm new password" field empty, the change should not be saved.
+    Then In the Password Change section, they enter their Current Password.
+    Then Next, they enter a New Password in the corresponding field.
+    Then Leaves the Confirm New Password field blank.
+    Then The user clicks on Save changes
+    And System displays an error message saying "Please re-enter your password."
+
+  @US38_TC07
+  Scenario: If the password does not meet the required criteria, the change should not be saved.
+    Then In the Password Change section, they enter their Current Password.
+    Then Enters a password shorter than twelve characters in the New Password field.
+    Then User confirms the new short password by entering it again in the Confirm New Password field.
+    Then A message should appear under the password box saying, "Weak - Please enter a stronger password."
+    And The Save Changes button should be disabled.
