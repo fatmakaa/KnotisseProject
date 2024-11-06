@@ -108,7 +108,6 @@ public class HomePage {
     public WebElement passwordTextBox;
     @FindBy(xpath = "(//button[@name='login'])[1]")
     public WebElement logInButton;
-
     @FindBy(id = "password")
     public WebElement passwordInLoginPopup;
 
@@ -123,6 +122,9 @@ public class HomePage {
 
     @FindBy(xpath = "//input[@id='account_first_name']")
     public WebElement firstNameBoxInAccountDetailsMenu;
+
+    @FindBy(xpath = "(//a[@href='https://knotisse.com/privacy-policies/'])[1]")
+    public WebElement privacyPolicy;
 
 
 }

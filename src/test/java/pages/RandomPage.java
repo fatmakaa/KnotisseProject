@@ -42,6 +42,9 @@ public class RandomPage {
     @FindBy (xpath ="//span[@class='yt-core-attributed-string yt-core-attributed-string--white-space-pre-wrap'][1]")
     public  WebElement knotisseYoutubeAssert;
 
+    @FindBy (xpath ="//div[@id='wrapper']")
+    public  WebElement assertPrivacyPolicy;
+
 
 
 }
