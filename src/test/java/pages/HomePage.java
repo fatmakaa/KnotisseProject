@@ -75,5 +75,17 @@ public class HomePage {
     @FindBy(xpath = "//*[@class='woocommerce-password-strength bad']")
     public WebElement underThePasswordBoxTextInAccountDetailsMenu;
 
+    @FindBy(xpath = "//a[@href='https://knotisse.com/terms-and-conditions/']")
+    public WebElement shippingAndReturnsMenu;
+
+    @FindBy(xpath = "//h1[@class='entry-title mb-0']")
+    public WebElement shippingAndReturnsPageTitle;
+
+    @FindBy(xpath = "//*[text()='Ordering Procedure']")
+    public WebElement orderingProcedureInShippingAndReturnsPage;
+
+    @FindBy(xpath = "//*[text()='Return & Cancellation Policy']")
+    public WebElement returnAndCancellationPolicyInShippingAndReturnsPage;
+
 
 }
