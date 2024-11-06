@@ -1,5 +1,5 @@
 @US19
-Feature: US019
+Feature:US019
 
   @US019_TC01
   Scenario: The user should be able to see the My E-mail Preferences link under My Account

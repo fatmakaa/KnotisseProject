@@ -22,8 +22,6 @@ public class US15_Fatma_StepDefs {
     public void verified_that_the_user_is_redirected_to_the_email_page() {
 
 
-
-
     }
 
 

@@ -76,6 +76,8 @@ public class HomePage {
 
     @FindBy(xpath = "(//button[@name='login'])[1]")
     public WebElement logInButton;
+    @FindBy(xpath = "(//a[@href='https://knotisse.com/privacy-policies/'])[1]")
+    public WebElement privacyPolicy;
 
 
 }
