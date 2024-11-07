@@ -102,5 +102,11 @@ public class HomePage {
     @FindBy(xpath = "//div[@class='message-container container alert-color medium-text-center']")
     public WebElement errorMessageInLoginRegisterPopUp;
 
+    @FindBy(xpath = "(//*[@class='nav-top-link'])[9]")
+    public WebElement vintageRugsMenu;
+
+    @FindBy(xpath = "(//a[@href='https://knotisse.com/wishlist/'])[4]")
+    public WebElement wishlistMenuInMyAccount;
+
 
 }
