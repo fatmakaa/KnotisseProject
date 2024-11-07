@@ -93,5 +93,14 @@ public class HomePage {
     @FindBy(xpath = "(//*[text()='Our Stores'])[2]")
     public WebElement ourStoresTextInBottomOfThePage;
 
+    @FindBy(xpath = "//input[@id='reg_email']")
+    public WebElement registerBoxInLoginRegisterPopUp;
+
+    @FindBy(xpath = "//button[@class='woocommerce-Button woocommerce-button button woocommerce-form-register__submit']")
+    public WebElement registerButtonInLoginRegisterPopUp;
+
+    @FindBy(xpath = "//div[@class='message-container container alert-color medium-text-center']")
+    public WebElement errorMessageInLoginRegisterPopUp;
+
 
 }
