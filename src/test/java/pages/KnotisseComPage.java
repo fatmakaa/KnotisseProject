@@ -35,6 +35,14 @@ public class KnotisseComPage {
     @FindBy(id = "wpforms-submit-5134")
     public WebElement submitButtonInContactPage;
 
+    @FindBy(xpath = "//*[text()='Our Main Office & Showroom']")
+    public WebElement ourStoresPageTitle;
+
+    @FindBy(xpath = "//*[text()='Istanbul Showroom & Studio']")
+    public WebElement istanbulShowroomTitle;
+
+    @FindBy(xpath = "//*[text()='Usak Facility']")
+    public WebElement usakFacilityTitle;
 
 
 }

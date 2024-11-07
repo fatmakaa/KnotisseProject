@@ -87,5 +87,11 @@ public class HomePage {
     @FindBy(xpath = "//*[text()='Return & Cancellation Policy']")
     public WebElement returnAndCancellationPolicyInShippingAndReturnsPage;
 
+    @FindBy(xpath = "(//*[text()='Contact'])[2]")
+    public WebElement contactTextInBottomOfThePage;
+
+    @FindBy(xpath = "(//*[text()='Our Stores'])[2]")
+    public WebElement ourStoresTextInBottomOfThePage;
+
 
 }
