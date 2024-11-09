@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -107,6 +108,11 @@ public class HomePage {
 
     @FindBy(xpath = "(//a[@href='https://knotisse.com/wishlist/'])[4]")
     public WebElement wishlistMenuInMyAccount;
+
+    @FindBy(xpath = "//a[@href='https://knotisse.com/knotisse-production-design-carpets/']")
+    public WebElement knotisseProductionMenu;
+
+
 
 
 }
