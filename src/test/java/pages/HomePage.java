@@ -126,5 +126,14 @@ public class HomePage {
     @FindBy(xpath = "(//a[@href='https://knotisse.com/privacy-policies/'])[1]")
     public WebElement privacyPolicy;
 
+    @FindBy(xpath = "//a[@href='https://knotisse.com/custom-made/']")
+    public WebElement servicesLink;
+    @FindBy(xpath = "//a[@href='https://knotisse.com/blog/']")
+    public WebElement blogLink;
+
+    @FindBy(xpath = "//img[@class='header-logo-dark']")
+    public WebElement logo;
+
+
 
 }

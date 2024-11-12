@@ -45,6 +45,16 @@ public class RandomPage {
     @FindBy (xpath ="//div[@id='wrapper']")
     public  WebElement assertPrivacyPolicy;
 
+    @FindBy (xpath ="//div[@id='contact-form-2311']")
+    public  WebElement formInServicesPage;
+
+    @FindBy (xpath ="(//a[@href='https://knotisse.com/turkish-rug-and-kilim-patterns-tradition-symbolism/'])[4]")
+    public  WebElement firstBlog;
+
+    @FindBy (xpath ="//h1[@class='entry-title']")
+    public  WebElement titleOfFirstBlog;
+
+
 
 
 }

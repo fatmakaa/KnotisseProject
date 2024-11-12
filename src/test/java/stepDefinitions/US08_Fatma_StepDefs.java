@@ -12,8 +12,6 @@ import utilities.JSUtils;
 import utilities.ReusableMethods;
 import utilities.WaitUtils;
 
-import static utilities.Driver.getDriver;
-
 public class US08_Fatma_StepDefs {
     HomePage homePage = new HomePage();
     AntiqueRugsPage antiqueRugsPage = new AntiqueRugsPage();
@@ -103,7 +101,6 @@ public class US08_Fatma_StepDefs {
     public void the_user_clicks_on_black_for_filtering_the_colour() {
 
         antiqueRugsPage.blackInFilter.click();
-
 
     }
 
