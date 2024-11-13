@@ -4,8 +4,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import pages.HomePage;
-import utilities.ConfigReader;
+import utilities.*;
+
+import java.security.Key;
 
 public class US38_Merve_StepDefs {
 
@@ -119,4 +123,41 @@ public class US38_Merve_StepDefs {
     public void systemDisplaysAnErrorMessageSaying(String relatedText) {
         Assert.assertEquals(homePage.yourCurrentPasswordIsIncorrectText.getText(), relatedText);
     }
+
+    @Then("In the Confirm New Password field, user enters a different password.")
+    public void inTheConfirmNewPasswordFieldUserEntersADifferentPassword() {
+        homePage.confirmNewPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("invalidPasswordForRegister"));
+    }
+
+    @Then("Leaves the Confirm New Password field blank.")
+    public void leavesTheConfirmNewPasswordFieldBlank() {
+        homePage.confirmNewPasswordBoxInAccountDetailsMenu.sendKeys("");
+    }
+
+    @Then("Enters a password shorter than twelve characters in the New Password field.")
+    public void entersAPasswordShorterThanTwelveCharactersInTheNewPasswordField() {
+        WaitUtils.waitForClickablility(homePage.newPasswordBoxInAccountDetailsMenu,10);
+        Actions actions = new Actions(Driver.getDriver());
+        actions.sendKeys(homePage.newPasswordBoxInAccountDetailsMenu,Keys.SPACE).sendKeys(homePage.newPasswordBoxInAccountDetailsMenu,Keys.SPACE).perform();
+        homePage.newPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("shortNewPassword"));
+
+    }
+
+    @Then("User confirms the new short password by entering it again in the Confirm New Password field.")
+    public void userConfirmsTheNewShortPasswordByEnteringItAgainInTheConfirmNewPasswordField() {
+        homePage.confirmNewPasswordBoxInAccountDetailsMenu.sendKeys(ConfigReader.getProperty("shortNewPassword"));
+
+    }
+
+    @Then("A message should appear under the password box saying, {string}")
+    public void aMessageShouldAppearUnderThePasswordBoxSaying(String expectedText) {
+        Assert.assertEquals(homePage.underThePasswordBoxTextInAccountDetailsMenu.getText(), expectedText);
+    }
+
+    @And("The Save Changes button should be disabled.")
+    public void theSaveChangesButtonShouldBeDisabled() {
+        Assert.assertFalse("Save changes button is enabled", homePage.saveChangesButtonInAccountDetailsMenu.isEnabled());
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -133,6 +134,47 @@ public class HomePage {
 
     @FindBy(xpath = "//img[@class='header-logo-dark']")
     public WebElement logo;
+
+
+    @FindBy(xpath = "//*[@class='woocommerce-password-strength bad']")
+    public WebElement underThePasswordBoxTextInAccountDetailsMenu;
+
+    @FindBy(xpath = "//a[@href='https://knotisse.com/terms-and-conditions/']")
+    public WebElement shippingAndReturnsMenu;
+
+    @FindBy(xpath = "//h1[@class='entry-title mb-0']")
+    public WebElement shippingAndReturnsPageTitle;
+
+    @FindBy(xpath = "//*[text()='Ordering Procedure']")
+    public WebElement orderingProcedureInShippingAndReturnsPage;
+
+    @FindBy(xpath = "//*[text()='Return & Cancellation Policy']")
+    public WebElement returnAndCancellationPolicyInShippingAndReturnsPage;
+
+    @FindBy(xpath = "(//*[text()='Contact'])[2]")
+    public WebElement contactTextInBottomOfThePage;
+
+    @FindBy(xpath = "(//*[text()='Our Stores'])[2]")
+    public WebElement ourStoresTextInBottomOfThePage;
+
+    @FindBy(xpath = "//input[@id='reg_email']")
+    public WebElement registerBoxInLoginRegisterPopUp;
+
+    @FindBy(xpath = "//button[@class='woocommerce-Button woocommerce-button button woocommerce-form-register__submit']")
+    public WebElement registerButtonInLoginRegisterPopUp;
+
+    @FindBy(xpath = "//div[@class='message-container container alert-color medium-text-center']")
+    public WebElement errorMessageInLoginRegisterPopUp;
+
+    @FindBy(xpath = "(//*[@class='nav-top-link'])[9]")
+    public WebElement vintageRugsMenu;
+
+    @FindBy(xpath = "(//a[@href='https://knotisse.com/wishlist/'])[4]")
+    public WebElement wishlistMenuInMyAccount;
+
+    @FindBy(xpath = "//a[@href='https://knotisse.com/knotisse-production-design-carpets/']")
+    public WebElement knotisseProductionMenu;
+
 
 
 
