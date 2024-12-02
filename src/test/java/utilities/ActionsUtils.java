@@ -5,6 +5,10 @@ import org.openqa.selenium.interactions.Actions;
 
 public class ActionsUtils {
 
+    //    ACTIONS_SENDKEYS
+    public static void actionsSendKeys(WebElement element, String value) {
+        new Actions(Driver.getDriver()).sendKeys(element, value).perform();
+    }
     //    ACTIONS_RIGHT CLICK
     public static void actionsRightClickOnElement(WebElement element) {
         new Actions(Driver.getDriver()).contextClick(element).perform();

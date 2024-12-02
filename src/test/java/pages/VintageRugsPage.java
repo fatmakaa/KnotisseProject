@@ -35,6 +35,40 @@ public class VintageRugsPage {
     @FindBy(xpath = "//select[@name='orderby']")
     public WebElement dropdownSorting;
 
+    @FindBy(xpath = "(//*[@class='woocommerce-LoopProduct-link woocommerce-loop-product__link'])[1]")
+    public WebElement firstProductInPage;
+
+    @FindBy(xpath = "(//*[@class='woocommerce-LoopProduct-link woocommerce-loop-product__link'])[2]")
+    public WebElement secondProductInPage;
+
+    @FindBy(xpath = "(//*[@class='icon-heart'])[1]")
+    public WebElement iconHeart;
+
+    @FindBy(xpath = "(//*[@class='wishlist-icon icon-heart has-products'])[1]")
+    public WebElement iconHeartInTheTopOfPage;
+
+    @FindBy(xpath = "(//*[text()='Add to wishlist'])[2]")
+    public WebElement addToWishListButton;
+
+    @FindBy(xpath = "(//*[@class='add_to_wishlist single_add_to_wishlist alt button theme-button-style '])[1]")
+    public WebElement addToWishListButtonInHEartIcon;
+
+    @FindBy(xpath = "(//*[@class='product-name'])[2]")
+    public WebElement firstProductNameInWishList;
+
+    @FindBy(xpath = "(//*[@class='product-name'])[3]")
+    public WebElement secondProductNameInWishList;
+
+    @FindBy(xpath = "(//*[@class='remove remove_from_wishlist'])[1]")
+    public WebElement deleteIconINWishList;
+
+    @FindBy(xpath = "(//*[@class='message-container container success-color medium-text-center'])[1]")
+    public WebElement deleteMessage;
+
+
+
+
+
 
 
 }
