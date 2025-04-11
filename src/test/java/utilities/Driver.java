@@ -60,12 +60,12 @@ public class Driver {
         }
 
 //            driver -> driver.get()
-        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        driver.get().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+        driver.get().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         driver.get().manage().window().maximize();
     }
     //    4. close driver
-    public static void closeDriver(){
+   public static void closeDriver(){
         if (driver!=null){
             driver.get().quit();
             driver.remove();

@@ -18,7 +18,7 @@ public class US01_Fatma_StepDefs {
 
     //-------------------------------------------TC01---------------------------------------------------------------
 
-    @When("User navigates to the relevant website.")
+    @When("user navigates to the relevant website.")
     public void user_navigates_to_the_relative_website() {
         Driver.getDriver().get(ConfigReader.getProperty("baseUrl"));
     }

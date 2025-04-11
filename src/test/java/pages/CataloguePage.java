@@ -22,4 +22,8 @@ public class CataloguePage {
     @FindBy(xpath = "//select[@class='orderby']")
     public WebElement orderDropdown;
 
+    @FindBy(xpath = "//nav[@class='woocommerce-breadcrumb breadcrumbs uppercase']")
+    public WebElement searchResultsForText;
+
+
 }
