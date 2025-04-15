@@ -8,6 +8,7 @@ import org.openqa.selenium.TakesScreenshot;
 import utilities.ConfigReader;
 import utilities.Driver;
 
+
 public class Hooks {
 
    // @Before
