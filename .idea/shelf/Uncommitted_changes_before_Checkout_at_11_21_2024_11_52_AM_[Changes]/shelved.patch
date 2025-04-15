@@ -1,0 +1,49 @@
+Index: src/test/resources/features/US01_Fatma.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Feature: US01\r\n  @US01_TC01\r\n  Scenario: US01_TC01\r\n    When User navigates to the relevant website.\r\n    Then Clicks on Catalogue.\r\n    Then Verifies that related products show up.\r\n    Then Navigates to the New Arrivals link.\r\n    Then Clicks on Catalogue again.\r\n     And Verifies that related products show up.\r\n\r\n  @US01_TC02\r\n  Scenario: US01_TC02\r\n    When User navigates to the relevant website.\r\n    Then Clicks on Catalogue.\r\n    And Verifies that product details are clearly displayed.\r\n\r\n  @US01_TC03\r\n  Scenario: US01_TC03\r\n    When User navigates to the relevant website.\r\n    Then Clicks on Catalogue.\r\n    Then Clicks on the Default sorting menu on the catalog page.\r\n    Then Selects the Sort by average rating option.\r\n    And Verifies that the sorting is done based on average rating.\r\n\r\n\r\n  @US01_TC04\r\n  Scenario: US01_TC04\r\n    When User navigates to the relevant website.\r\n    Then Clicks on Catalogue.\r\n    Then Clicks on the Default sorting menu on the catalog page.\r\n    Then Selects the Sort by latest option.\r\n    And Verifies that the sorting is done based on the newest products.\r\n\r\n\r\n  @US01_TC05\r\n  Scenario: US01_TC05\r\n    When User navigates to the relevant website.\r\n    Then Clicks on Catalogue.\r\n    Then Clicks on the Default sorting menu on the catalog page.\r\n    Then Selects the Sort by popularity sorting option.\r\n    And Verifies  that the sorting is done based on the most popular products.\r\n\r\n
+===================================================================
+diff --git a/src/test/resources/features/US01_Fatma.feature b/src/test/resources/features/US01_Fatma.feature
+--- a/src/test/resources/features/US01_Fatma.feature	
++++ b/src/test/resources/features/US01_Fatma.feature	
+@@ -1,7 +1,9 @@
+ Feature: US01
++  Background:
++    When user navigates to the relevant website.
++
+   @US01_TC01
+   Scenario: US01_TC01
+-    When User navigates to the relevant website.
+     Then Clicks on Catalogue.
+     Then Verifies that related products show up.
+     Then Navigates to the New Arrivals link.
+@@ -10,13 +12,11 @@
+ 
+   @US01_TC02
+   Scenario: US01_TC02
+-    When User navigates to the relevant website.
+     Then Clicks on Catalogue.
+     And Verifies that product details are clearly displayed.
+ 
+   @US01_TC03
+   Scenario: US01_TC03
+-    When User navigates to the relevant website.
+     Then Clicks on Catalogue.
+     Then Clicks on the Default sorting menu on the catalog page.
+     Then Selects the Sort by average rating option.
+@@ -25,7 +25,6 @@
+ 
+   @US01_TC04
+   Scenario: US01_TC04
+-    When User navigates to the relevant website.
+     Then Clicks on Catalogue.
+     Then Clicks on the Default sorting menu on the catalog page.
+     Then Selects the Sort by latest option.
+@@ -34,7 +33,6 @@
+ 
+   @US01_TC05
+   Scenario: US01_TC05
+-    When User navigates to the relevant website.
+     Then Clicks on Catalogue.
+     Then Clicks on the Default sorting menu on the catalog page.
+     Then Selects the Sort by popularity sorting option.

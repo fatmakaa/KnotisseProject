@@ -48,7 +48,7 @@ public class HomePage {
     public WebElement catalogue;
 
     @FindBy(xpath = "//a[@href='https://knotisse.com/new-arrivals/'][1]")
-    public WebElement newArrivals;
+    public WebElement newArrivals2;
 
     @FindBy(xpath = "//a[@href='https://knotisse.com/antique-rugs-turkish-persian/'][1]")
     public WebElement antiqueRugs;

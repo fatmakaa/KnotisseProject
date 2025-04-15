@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
         glue = {"stepDefinitions", "hooks"},//path of the stepdefinitions folder
         dryRun = false, //generate the missing step definitions only. Do not run the existing step definitions
 
-        tags = "@US07",
+        tags = "@US07"
 
 
 

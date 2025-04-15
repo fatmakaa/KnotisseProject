@@ -1,0 +1,1148 @@
+Index: src/test/java/hooks/Hooks.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package hooks;\r\n\r\nimport io.cucumber.java.After;\r\nimport io.cucumber.java.Before;\r\nimport io.cucumber.java.Scenario;\r\nimport org.openqa.selenium.OutputType;\r\nimport org.openqa.selenium.TakesScreenshot;\r\nimport utilities.ConfigReader;\r\nimport utilities.Driver;\r\n\r\npublic class Hooks {\r\n   // @Before\r\n   // public void setUpScenarios(){\r\n// //       System.out.println(\"Before Hooks\");\r\n   // }\r\n    @After\r\n    public void afterTearDown(Scenario scenario){\r\n//        System.out.println(\"After Hooks\");\r\n//        if a test scenario fails, then capture the screenshot, and attach it to the html report\r\n        if (scenario.isFailed()) {\r\n            final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);\r\n            scenario.attach(screenshot,\"image/png\",\"failed_screenshot\");\r\n            Driver.closeDriver();\r\n        }\r\n    }\r\n\r\n    //    we can use conditional hooks using cucumber tags\r\n  //  @After(\"\")\r\n  //  public void afterAllTearDown(){\r\n  //    Driver.getDriver().close();\r\n  //  }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/hooks/Hooks.java b/src/test/java/hooks/Hooks.java
+--- a/src/test/java/hooks/Hooks.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/hooks/Hooks.java	(date 1732186477848)
+@@ -9,24 +9,27 @@
+ import utilities.Driver;
+ 
+ public class Hooks {
+-   // @Before
+-   // public void setUpScenarios(){
+-// //       System.out.println("Before Hooks");
+-   // }
++    @Before
++    public void setUp() {
++        Driver.getDriver().manage().window().maximize();
++        Driver.getDriver().get(ConfigReader.getProperty("baseUrl"));
++    }
++
++
+     @After
+     public void afterTearDown(Scenario scenario){
+-//        System.out.println("After Hooks");
+-//        if a test scenario fails, then capture the screenshot, and attach it to the html report
+         if (scenario.isFailed()) {
+             final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+             scenario.attach(screenshot,"image/png","failed_screenshot");
+-            Driver.closeDriver();
+-        }
+-    }
++             Driver.closeDriver();
++        }
++    }
++
++    @After
++    public void tearDown() {
++        Driver.closeDriver();
++    }
++
++
++}
+ 
+-    //    we can use conditional hooks using cucumber tags
+-  //  @After("")
+-  //  public void afterAllTearDown(){
+-  //    Driver.getDriver().close();
+-  //  }
+-}
+\ No newline at end of file
+Index: src/test/java/stepDefinitions/US03_Merve_StepDefs.java
+===================================================================
+diff --git a/src/test/java/stepDefinitions/US03_Merve_StepDefs.java b/src/test/java/stepDefinitions/US03_Merve_StepDefs.java
+deleted file mode 100644
+--- a/src/test/java/stepDefinitions/US03_Merve_StepDefs.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ /dev/null	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
+@@ -1,146 +0,0 @@
+-package stepDefinitions;
+-
+-import io.cucumber.java.en.Given;
+-import io.cucumber.java.en.Then;
+-import org.junit.Assert;
+-import org.openqa.selenium.By;
+-import org.openqa.selenium.StaleElementReferenceException;
+-import org.openqa.selenium.WebElement;
+-import org.openqa.selenium.support.ui.ExpectedConditions;
+-import org.openqa.selenium.support.ui.Select;
+-import org.openqa.selenium.support.ui.WebDriverWait;
+-import pages.CataloguePage;
+-import pages.HomePage;
+-import pages.RandomPage;
+-import utilities.ConfigReader;
+-import utilities.Driver;
+-import utilities.ReusableMethods;
+-import java.time.Duration;
+-import java.util.Arrays;
+-import java.util.List;
+-import java.util.Random;
+-
+-public class US03_Merve_StepDefs {
+-
+-    HomePage homePage = new HomePage();
+-    CataloguePage cataloguePage = new CataloguePage();
+-    RandomPage randomPage = new RandomPage();
+-    Random rnd = new Random();
+-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+-
+-
+-    @Given("The user navigates to the related website.")
+-    public void the_user_navigates_to_the_related_website() {
+-        Driver.getDriver().get(ConfigReader.getProperty("baseUrl"));
+-    }
+-
+-    @Then("The user clicks on the search icon.")
+-    public void the_user_clicks_on_the_search_icon() {
+-        ReusableMethods.click(homePage.searchButtonTopOfHomePage);
+-    }
+-
+-    @Then("The user types {string} into the search box.")
+-    public void the_user_types_into_the_search_box(String string) {
+-        ReusableMethods.visibleWait(homePage.searchButtonTopOfHomePage, 2);
+-        homePage.searchButtonTopOfHomePage.sendKeys(string);
+-    }
+-
+-    @Then("The user clicks the search button.")
+-    public void the_user_clicks_the_search_button() {
+-        ReusableMethods.click(homePage.searchButtonAfterClickSearchButton);
+-    }
+-
+-    @Then("The user sees the total number of results displayed in the window that opens.")
+-    public void the_user_sees_the_total_number_of_results_displayed_in_the_window_that_opens() {
+-        Assert.assertTrue("The user doesn't see the total number of results displayed in the window that opens.",
+-                cataloguePage.numberOfResultsAfterProductSearch.isDisplayed());
+-    }
+-
+-    @Then("The user clicks on the first product.")
+-    public void the_user_clicks_on_the_first_product() {
+-        ReusableMethods.click(randomPage.firstProductAfterAnatolianKilimRugSearch);
+-    }
+-
+-    @Then("The user views the details of the selected product.")
+-    public void the_user_views_the_details_of_the_selected_product() {
+-        ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
+-        Assert.assertTrue("The user doesn't view the details of the selected product",
+-                randomPage.titleOfAfterProductSearch.isDisplayed());
+-    }
+-
+-    @Then("The user returns to the search box and searches for another specific product.")
+-    public void the_user_returns_to_the_search_box_and_searches_for_another_specific_product() {
+-        ReusableMethods.click(homePage.searchButtonTopOfHomePage);
+-        List<String> randomTitleList = Arrays.asList("ANTIQUE RUGS", "KNOTISSE PRODUCTION", "SEATING", "THROW PILLOWS", "UPHOLSTERY", "VINTAGE");
+-        for (String randomTitle : randomTitleList) {
+-            homePage.searchButtonTopOfHomePage.sendKeys(randomTitle);
+-            break;
+-        }
+-        ReusableMethods.click(homePage.searchButtonAfterClickSearchButton);
+-    }
+-
+-    @Then("The user clicks on one of the available options and views the details of the product that opens.")
+-    public void the_user_clicks_on_one_of_the_available_options_and_views_the_details_of_the_product_that_opens() {
+-        int randomNumber = 1 + rnd.nextInt(12);
+-        WebElement randomProduct = Driver.getDriver().findElement(By.xpath("(//a[contains(.,'Antique')])[" + randomNumber + "]"));
+-        ReusableMethods.wait(6);
+-        try {
+-            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(randomProduct));
+-            ReusableMethods.click(element);
+-        } catch (StaleElementReferenceException e) {
+-
+-        }
+-        ReusableMethods.wait(5);
+-        ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
+-        Assert.assertTrue("The user doesn't view the details of the selected product",
+-                randomPage.titleOfAfterProductSearch.isDisplayed());
+-
+-    }
+-
+-
+-    @Then("On the results page, the user sees the total number of search results.")
+-    public void on_the_results_page_the_user_sees_the_total_number_of_search_results() {
+-        Assert.assertTrue("On the results page, the user doesn't see the total number of search results.",
+-                cataloguePage.numberOfResultsAfterProductSearch.isDisplayed());
+-
+-    }
+-
+-    @Then("The user clicks on any product.")
+-    public void the_user_clicks_on_any_product() {
+-        int randomNumber = 1 + rnd.nextInt(16);
+-        WebElement randomProduct = Driver.getDriver().findElement(By.xpath("(//a[contains(.,'Authentic')])[" + randomNumber + "]"));
+-        ReusableMethods.wait(6);
+-        try {
+-            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(randomProduct));
+-            ReusableMethods.click(element);
+-        } catch (StaleElementReferenceException e) {
+-
+-        }
+-        ReusableMethods.wait(5);
+-
+-    }
+-
+-    @Then("The user accesses the details of the selected product.")
+-    public void the_user_accesses_the_details_of_the_selected_product() {
+-        ReusableMethods.visibleWait(randomPage.titleOfAfterProductSearch, 5);
+-        Assert.assertTrue("The user doesn't access the details of the selected product.",
+-                randomPage.titleOfAfterProductSearch.isDisplayed());
+-    }
+-
+-    @Then("The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses {string}.")
+-    public void the_user_sorts_the_products_based_on_their_preference_by_selecting_an_option_from_the_relevance_dropdown_chooses(String string) {
+-        cataloguePage.catalogueMenu.click();
+-        WebElement sortByElement = Driver.getDriver().findElement(By.xpath("//*[text()='" + string + "']"));
+-        ReusableMethods.click(sortByElement);
+-    }
+-
+-    @Then("While on the {string} option, the user clicks on the search button.")
+-    public void while_on_the_option_the_user_clicks_on_the_search_button(String string) {
+-        Select dropdown = new Select(homePage.searchDropdown);
+-        dropdown.selectByVisibleText(string);
+-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(homePage.searchButtonAfterClickSearchButton));
+-        ReusableMethods.click(element);
+-        ReusableMethods.scrollHome();
+-    }
+-
+-}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+deleted file mode 100644
+--- a/.idea/misc.xml	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ /dev/null	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
+@@ -1,15 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="MavenProjectsManager">
+-    <option name="originalFiles">
+-      <list>
+-        <option value="$PROJECT_DIR$/pom.xml" />
+-      </list>
+-    </option>
+-    <option name="workspaceImportForciblyTurnedOn" value="true" />
+-  </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="corretto-19" project-jdk-type="JavaSDK">
+-    <output url="file://$PROJECT_DIR$/out" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: src/test/java/stepDefinitions/US01_Fatma_StepDefs.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package stepDefinitions;\r\n\r\nimport io.cucumber.java.en.Then;\r\nimport io.cucumber.java.en.When;\r\nimport org.openqa.selenium.support.ui.Wait;\r\nimport utilities.ConfigReader;\r\nimport utilities.Driver;\r\n\r\n\r\npublic class US01_Fatma_StepDefs {\r\n\r\n    @When(\"İlgili web siteye gidilir.\")\r\n    public void i̇lgili_web_siteye_gidilir() throws InterruptedException {\r\n\r\n        Driver.getDriver().get(ConfigReader.getProperty(\"baseUrl\"));\r\n    }\r\n\r\n    @Then(\"Home page üzerinden {string} menüsüne tıklanır.\")\r\n    public void home_page_üzerinden_menüsüne_tıklanır(String string) {\r\n\r\n\r\n    }\r\n    @Then(\"İlgili ürünlerin listelendiği doğrulanır.\")\r\n    public void i̇lgili_ürünlerin_listelendiği_doğrulanır() {\r\n\r\n    }\r\n    @Then(\"Alternatif olarak, başka bir sayfa üzerinden \\\\(örn. new arrivals sayfası) {string} menüsüne tıklanır.\")\r\n    public void alternatif_olarak_başka_bir_sayfa_üzerinden_örn_new_arrivals_sayfası_menüsüne_tıklanır(String string) {\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java b/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java
+--- a/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java	(date 1732186502960)
+@@ -2,34 +2,122 @@
+ 
+ import io.cucumber.java.en.Then;
+ import io.cucumber.java.en.When;
++import org.junit.Assert;
++import org.openqa.selenium.support.ui.Select;
+ import org.openqa.selenium.support.ui.Wait;
+-import utilities.ConfigReader;
+-import utilities.Driver;
++import pages.CataloguePage;
++import pages.HomePage;
++import utilities.*;
+ 
+ 
+ public class US01_Fatma_StepDefs {
++    HomePage homePage = new HomePage();
++
++    CataloguePage catalogue = new CataloguePage();
+ 
+-    @When("İlgili web siteye gidilir.")
+-    public void i̇lgili_web_siteye_gidilir() throws InterruptedException {
+ 
++    //-------------------------------------------TC01---------------------------------------------------------------
++
++    @When("user navigates to the relevant website.")
++    public void user_navigates_to_the_relative_website() {
+         Driver.getDriver().get(ConfigReader.getProperty("baseUrl"));
+     }
+ 
+-    @Then("Home page üzerinden {string} menüsüne tıklanır.")
+-    public void home_page_üzerinden_menüsüne_tıklanır(String string) {
++    @Then("Clicks on Catalogue.")
++    public void clicks_on_catalogue() {
++        homePage.catalogue.click();
++    }
++
++    @Then("Verifies that related products show up.")
++    public void verifies_that_related_products_show_up() {
++        ReusableMethods.flashElement(homePage.catalogue);
++    }
++
++    @Then("Navigates to the New Arrivals link.")
++    public void navigates_to_the_new_arrivals_link() {
++        homePage.newArrivals.click();
++        ReusableMethods.flashElement(homePage.newArrivals);
++    }
++
++    @Then("Clicks on Catalogue again.")
++    public void clicks_on_catalogue_again() {
++        homePage.catalogue.click();
++    }
++
++
++    // -------------------------------------------TC02---------------------------------------------------------------
++
++
++    @Then("Verifies that product details are clearly displayed.")
++    public void verifies_that_product_details_are_clearly_displayed() {
++
++        Assert.assertTrue(catalogue.firstCatalogueDetail.isDisplayed());
++        JSUtils.JSscrollIntoView(catalogue.firstCatalogueDetail);
++        ReusableMethods.flashElement(catalogue.firstCatalogueDetail);
++
++    }
++
++
++    // -------------------------------------------TC03---------------------------------------------------------------
++
+ 
++    @Then("Clicks on the Default sorting menu on the catalog page.")
++    public void clicks_on_the_default_sorting_menu_on_the_catalog_page() {
++        catalogue.orderDropdown.click();
++    }
+ 
++    @Then("Selects the Sort by average rating option.")
++    public void selects_the_sort_by_average_rating_option() {
++        Select select = new Select(catalogue.orderDropdown);
++        select.selectByVisibleText("Sort by average rating");
+     }
+-    @Then("İlgili ürünlerin listelendiği doğrulanır.")
+-    public void i̇lgili_ürünlerin_listelendiği_doğrulanır() {
++
++    @Then("Verifies that the sorting is done based on average rating.")
++    public void verifies_that_the_sorting_is_done_based_on_average_rating() {
++
++        Select select = new Select(catalogue.orderDropdown);
++        String selectedOption = select.getFirstSelectedOption().getText();
++        Assert.assertEquals("Sort by average rating", selectedOption);
+ 
+     }
+-    @Then("Alternatif olarak, başka bir sayfa üzerinden \\(örn. new arrivals sayfası) {string} menüsüne tıklanır.")
+-    public void alternatif_olarak_başka_bir_sayfa_üzerinden_örn_new_arrivals_sayfası_menüsüne_tıklanır(String string) {
+ 
++
++    // -------------------------------------------TC04---------------------------------------------------------------
++
++    @Then("Selects the Sort by latest option.")
++    public void selects_the_sort_by_latest_option() {
++        Select select = new Select(catalogue.orderDropdown);
++        select.selectByVisibleText("Sort by latest");
+     }
+ 
+ 
++    @Then("Verifies that the sorting is done based on the newest products.")
++    public void verifies_that_the_sorting_is_done_based_on_the_newest_products() {
+ 
++        Select select = new Select(catalogue.orderDropdown);
++        String selectedOption = select.getFirstSelectedOption().getText();
++        Assert.assertEquals("Sort by latest", selectedOption);
++
++    }
++
++
++    // -------------------------------------------TC05---------------------------------------------------------------
++
++    @Then("Selects the Sort by popularity sorting option.")
++    public void selects_the_sort_by_popularity_sorting_option() {
++
++        Select select = new Select(catalogue.orderDropdown);
++        select.selectByVisibleText("Sort by popularity");
++
++    }
++
++    @Then("Verifies  that the sorting is done based on the most popular products.")
++    public void verifies_that_the_sorting_is_done_based_on_the_most_popular_products() {
++
++        Select select = new Select(catalogue.orderDropdown);
++        String selectedOption = select.getFirstSelectedOption().getText();
++        Assert.assertEquals("Sort by popularity", selectedOption);
++
++    }
+ 
+ }
+Index: src/test/resources/features/US09_Merve.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/features/US09_Merve.feature b/src/test/resources/features/US09_Merve.feature
+--- a/src/test/resources/features/US09_Merve.feature	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/resources/features/US09_Merve.feature	(date 1732186503007)
+@@ -1,0 +1,8 @@
++@US09
++Feature: The user should be able to access the contact information by clicking the "Contact" link at the top of the page.
++
++  Scenario: The user should be able to access the contact information by clicking the "Contact" link at the top of the page.
++    Given The visibility and clickability of the Contact button are verified.
++    Then It is verified that when the Contact button is clicked, a page containing a contact form opens.
++    Then The visibility of the name, email, phone number, and message fields in the contact form, as well as the ability to enter information into them, is verified.
++    Then It is verified that a message can be sent by entering the name, email, phone number, and message details into the contact form.
+Index: src/test/java/utilities/ReusableMethods.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package utilities;\r\n\r\nimport org.openqa.selenium.By;\r\nimport org.openqa.selenium.JavascriptExecutor;\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.support.ui.ExpectedConditions;\r\nimport org.openqa.selenium.support.ui.Select;\r\nimport org.openqa.selenium.support.ui.WebDriverWait;\r\n\r\nimport java.time.Duration;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class ReusableMethods {\r\n    //HARD WAIT METHOD\r\n    public static void wait(int second) {\r\n        try {\r\n            Thread.sleep(second * 1000);\r\n        } catch (InterruptedException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n    }\r\n\r\n    //Alert ACCEPT\r\n    public static void alertAccept() {\r\n        Driver.getDriver().switchTo().alert().accept();\r\n    }\r\n\r\n    //Alert DISMISS\r\n    public static void alertDismiss() {\r\n        Driver.getDriver().switchTo().alert().dismiss();\r\n    }\r\n\r\n    //Alert getText()\r\n    public static void alertText() {\r\n        Driver.getDriver().switchTo().alert().getText();\r\n    }\r\n\r\n    //Alert promptBox\r\n    public static void alertprompt(String text) {\r\n        Driver.getDriver().switchTo().alert().sendKeys(text);\r\n    }\r\n\r\n    //DropDown VisibleText\r\n    /*\r\n        Select select2 = new Select(day);\r\n        select2.selectByVisibleText(\"7\");\r\n\r\n        //ddmVisibleText(day,\"7\"); --> can be also used instead of above expression\r\n     */\r\n    public static void ddmVisibleText(WebElement ddm, String option) {\r\n        Select select = new Select(ddm);\r\n        select.selectByVisibleText(option);\r\n    }\r\n\r\n    //DropDown Index\r\n    public static void ddmIndex(WebElement ddm, int index) {\r\n        Select select = new Select(ddm);\r\n        select.selectByIndex(index);\r\n    }\r\n\r\n    //DropDown Value\r\n    public static void ddmValue(WebElement ddm, String option) {\r\n        Select select = new Select(ddm);\r\n        select.selectByValue(option);\r\n    }\r\n\r\n    //SwitchToWindow1\r\n    public static void switchToWindow(int num) {\r\n        List<String> allWindowHandles = new ArrayList<String>(Driver.getDriver().getWindowHandles());\r\n        Driver.getDriver().switchTo().window(allWindowHandles.get(num));\r\n    }\r\n\r\n    //SwitchToWindow2\r\n    public static void window(int num) {\r\n        Driver.getDriver().switchTo().window(Driver.getDriver().getWindowHandles().toArray()[num].toString());\r\n    }\r\n    //EXPLICIT WAIT METHODS\r\n\r\n    //Visible Wait\r\n    public static void visibleWait(WebElement element, int num) {\r\n        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(num));\r\n        wait.until(ExpectedConditions.visibilityOf(element));\r\n\r\n    }\r\n\r\n    //VisibleElementLocator Wait\r\n    public static WebElement visibleWait(By locator, int num) {\r\n        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(num));\r\n        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));\r\n\r\n    }\r\n\r\n    //Alert Wait\r\n    public static void alertWait(int num) {\r\n        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(num));\r\n        wait.until(ExpectedConditions.alertIsPresent());\r\n\r\n    }\r\n\r\n\r\n    //WebTable\r\n    public static void printData(int satir, int sutun) {\r\n        WebElement rowColumn = Driver.getDriver().findElement(By.xpath(\"(//tbody)[1]//tr[\" + satir + \"]//td[\" + sutun + \"]\"));\r\n        System.out.println(rowColumn.getText());\r\n    }\r\n\r\n    //Click Method\r\n    public static void click(WebElement element) {\r\n        try {\r\n            element.click();\r\n        } catch (Exception e) {\r\n            JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\r\n            js.executeScript(\"arguments[0].click();\", element);\r\n        }\r\n    }\r\n\r\n    //JS Scroll\r\n    public static void scroll(WebElement element) {\r\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\r\n        js.executeScript(\"arguments[0].scrollIntoView(true);\", element);\r\n    }\r\n\r\n    //JS Scroll to End Of Page\r\n    public static void scrollEnd() {\r\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\r\n        js.executeScript(\"window.scrollTo(0,document.body.scrollHeight)\");\r\n    }\r\n\r\n    //JS Scroll to Top Of The Page\r\n    public static void scrollHome() {\r\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\r\n        js.executeScript(\"window.scrollTo(0,-document.body.scrollHeight)\");\r\n    }\r\n\r\n    //JS SendKeys\r\n    public static void sendKeysJS(WebElement element, String text) {\r\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\r\n        js.executeScript(\"arguments[0].value='\" + text + \"'\", element);\r\n    }\r\n\r\n    //JS SendAttributeValue\r\n    public static void sendAttributeJS(WebElement element, String text) {\r\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\r\n        js.executeScript(\"arguments[0].setAttribute('value','\" + text + \"')\", element);\r\n    }\r\n\r\n    //JS GetAttributeValue\r\n    public static void getValueByJS(String id, String attributeName) {\r\n        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();\r\n        String attribute_Value = (String) js.executeScript(\"return document.getElementById('\" + id + \"').\" + attributeName);\r\n        System.out.println(\"Attribute Value: = \" + attribute_Value);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/utilities/ReusableMethods.java b/src/test/java/utilities/ReusableMethods.java
+--- a/src/test/java/utilities/ReusableMethods.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/utilities/ReusableMethods.java	(date 1732186511105)
+@@ -75,6 +75,7 @@
+     public static void window(int num) {
+         Driver.getDriver().switchTo().window(Driver.getDriver().getWindowHandles().toArray()[num].toString());
+     }
++
+     //EXPLICIT WAIT METHODS
+ 
+     //Visible Wait
+@@ -151,4 +152,44 @@
+         String attribute_Value = (String) js.executeScript("return document.getElementById('" + id + "')." + attributeName);
+         System.out.println("Attribute Value: = " + attribute_Value);
+     }
+-}
++
++
++    //Flash Element
++    public static void flashElement(WebElement element) {
++        JavascriptExecutor jsExecutor = (JavascriptExecutor) Driver.getDriver();
++        for (int i = 0; i < 10; i++) {
++            jsExecutor.executeScript("arguments[0].style.backgroundColor = 'blue'", element);
++            try {
++                Thread.sleep(50);
++            } catch (InterruptedException e) {
++                throw new RuntimeException(e);
++            }
++            jsExecutor.executeScript("arguments[0].style.backgroundColor = ''", element);
++            try {
++                Thread.sleep(50);
++            } catch (InterruptedException e) {
++                throw new RuntimeException(e);
++            }
++        }
++    }
++
++    //========Switching Window=====//
++    public static void switchToWindow(String targetTitle) {
++        String origin = Driver.getDriver().getWindowHandle();
++        for (String handle : Driver.getDriver().getWindowHandles()) {
++            Driver.getDriver().switchTo().window(handle);
++            if (Driver.getDriver().getTitle().equals(targetTitle)) {
++                return;
++            }
++        }
++      //  Driver.getDriver().switchTo().window(origin);
++    }
++
++
++
++
++
++
++
++
++}
+\ No newline at end of file
+Index: src/test/resources/features/US03_Merve.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Feature: An unregistered user can browse products on the Knottise website (both from the top and bottom of the page\r\n\r\n  @US03_TC01\r\n  Scenario: The user searches for a specific type of product and views the relevant results.\r\n    Given The user navigates to the related website.\r\n    Then The user clicks on the search icon.\r\n    Then The user types \"Anatolian Kilim Rug\" into the search box.\r\n    Then The user clicks the search button.\r\n    Then The user sees the total number of results displayed in the window that opens.\r\n    Then The user clicks on the first product.\r\n    Then The user views the details of the selected product.\r\n    Then The user returns to the search box and searches for another specific product.\r\n    And The user clicks on one of the available options and views the details of the product that opens.\r\n\r\n  @US03_TC02\r\n  Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results.\r\n    Given The user navigates to the related website.\r\n    Then The user clicks on the search icon.\r\n    Then While on the \"All\" option, the user clicks on the search button.\r\n    Then On the results page, the user sees the total number of search results.\r\n    Then The user clicks on any product.\r\n    Then The user accesses the details of the selected product.\r\n    And The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses \"Sort by latest\".\r\n\r\n  @US03_TC03\r\n  Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results.\r\n    Given The user navigates to the related website.\r\n    Then The user clicks on the search icon.\r\n    Then While on the \"ANTIQUE RUGS\" option, the user clicks on the search button.\r\n    Then On the results page, the user sees the total number of search results.\r\n    Then The user clicks on one of the available options and views the details of the product that opens.\r\n    Then The user accesses the details of the selected product.\r\n    And The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses \"Sort by latest\".
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/features/US03_Merve.feature b/src/test/resources/features/US03_Merve.feature
+--- a/src/test/resources/features/US03_Merve.feature	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/resources/features/US03_Merve.feature	(date 1732186384869)
+@@ -1,33 +1,36 @@
+-Feature: An unregistered user can browse products on the Knottise website (both from the top and bottom of the page
++@US03
++Feature: An unregistered user can browse products on the Knottise website both from the top and bottom of the page
++
++  Background:
++    Then The user clicks on the search icon.
+ 
+-  @US03_TC01
+-  Scenario: The user searches for a specific type of product and views the relevant results.
+-    Given The user navigates to the related website.
+-    Then The user clicks on the search icon.
+-    Then The user types "Anatolian Kilim Rug" into the search box.
+-    Then The user clicks the search button.
+-    Then The user sees the total number of results displayed in the window that opens.
+-    Then The user clicks on the first product.
+-    Then The user views the details of the selected product.
+-    Then The user returns to the search box and searches for another specific product.
+-    And The user clicks on one of the available options and views the details of the product that opens.
++ @US03_TC01
++ Scenario: The user searches for a specific type of product and views the relevant results.
++  Then The user types "Anatolian Kilim Rug" into the search box.
++  Then The user clicks the search button.
++  Then The user sees the total number of results displayed in the window that opens.
++  Then The user clicks on the first product.
++  Then The user views the details of the selected product.
++  Then The user returns to the search box and searches for another specific product.
++  And The user clicks on one of the available options and views the details of the product that opens.
+ 
+   @US03_TC02
+-  Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results.
+-    Given The user navigates to the related website.
+-    Then The user clicks on the search icon.
+-    Then While on the "All" option, the user clicks on the search button.
++  Scenario Outline: The user can search using the different options from the dropdown without registering, access the products and product details on the resulting page, and see the total number of results.
++    Then While on the "<options>", the user clicks on the search button.
+     Then On the results page, the user sees the total number of search results.
+-    Then The user clicks on any product.
++    Then The user clicks on any product with the "<titles>"
+     Then The user accesses the details of the selected product.
+-    And The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses "Sort by latest".
++    And The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses "Default sorting", "Sort by popularity", "Sort by average rating", "Sort by latest".
++
++    Examples:
++      | options             | titles     |
++      | All                 | Authentic  |
++      | ANTIQUE RUGS        | Antique    |
++      | KNOTISSE PRODUCTION | Handmade   |
++      | SEATING             | Handmade   |
++      | THROW PILLOWS       | Handmade   |
++      | UPHOLSTERY          | Upholstery |
++      | VINTAGE             | Authentic  |
+ 
+-  @US03_TC03
+-  Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results.
+-    Given The user navigates to the related website.
+-    Then The user clicks on the search icon.
+-    Then While on the "ANTIQUE RUGS" option, the user clicks on the search button.
+-    Then On the results page, the user sees the total number of search results.
+-    Then The user clicks on one of the available options and views the details of the product that opens.
+-    Then The user accesses the details of the selected product.
+-    And The user sorts the products based on their preference by selecting an option from the Relevance dropdown chooses "Sort by latest".
+\ No newline at end of file
++
++
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"8aeaeea6-4d09-4f71-a369-474301a18c77\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/hooks/Hooks.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/hooks/Hooks.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/pages/VintageRugsPage.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/pages/VintageRugsPage.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/stepDefinitions/US07_Huma_StepDefs.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/stepDefinitions/US07_Huma_StepDefs.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/resources/features/US07_Huma.feature\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/resources/features/US07_Huma.feature\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n    &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;Arslnmerv&quot;\r\n    }\r\n    }</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n    &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/fatmakaa/KnotisseProject.git&quot;,\r\n    &quot;accountId&quot;: &quot;9852423e-2b6c-4376-87cc-8a308ae85b89&quot;\r\n    }\r\n    }</component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n    &quot;associatedIndex&quot;: 0\r\n    }</component>\r\n  <component name=\"ProjectId\" id=\"2lqT5q87fDQtEEFgnJq2MdiE48o\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Cucumber Java.Scenario: TC01_The number of products can be listed under Vintage Rugs categories.executor\": \"Run\",\r\n    \"Cucumber Java.Scenario: TC02_Verify the filtering options under Vintage Rugs categories.executor\": \"Run\",\r\n    \"Cucumber Java.Scenario: TC03_The product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details of the seating product..executor\": \"Run\",\r\n    \"JUnit.FailedTestRunner.executor\": \"Run\",\r\n    \"JUnit.Runner.executor\": \"Run\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"huma\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/humai/IdeaProjects/KnotisseProject/src/test/java/stepDefinitions\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.3137931\",\r\n    \"settings.editor.selected.configurable\": \"preferences.pluginManager\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Scenario: TC01_The number of products can be listed under Vintage Rugs categories\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/US07_Huma.feature\" />\r\n      <option name=\"GLUE\" value=\"stepDefinitions hooks\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"KnotisseProject\" />\r\n      <option name=\"NAME_FILTER\" value=\"^TC01_The number of products can be listed under Vintage Rugs categories$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^TC01_The number of products can be listed under Vintage Rugs categories$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: TC01_The number of products can be listed under Vintage Rugs categories\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: TC02_Verify the filtering options under Vintage Rugs categories\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/US07_Huma.feature\" />\r\n      <option name=\"GLUE\" value=\"stepDefinitions hooks\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"KnotisseProject\" />\r\n      <option name=\"NAME_FILTER\" value=\"^TC02_Verify the filtering options under Vintage Rugs categories$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^TC02_Verify the filtering options under Vintage Rugs categories$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: TC02_Verify the filtering options under Vintage Rugs categories\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: TC03_The product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details of the seating product.\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/US07_Huma.feature\" />\r\n      <option name=\"GLUE\" value=\"stepDefinitions hooks\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"KnotisseProject\" />\r\n      <option name=\"NAME_FILTER\" value=\"^TC03_The product detail page displays high\\-resolution images\\, detailed description\\, dimensions\\, material information\\, and other relevant details of the seating product\\.$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^TC03_The product detail page displays high\\-resolution images\\, detailed description\\, dimensions\\, material information\\, and other relevant details of the seating product\\.$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: TC03_The product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details of the seating product.\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: US01_TC01\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/US01_Fatma.feature\" />\r\n      <option name=\"GLUE\" value=\"stepDefinitions hooks\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"KnotisseProject\" />\r\n      <option name=\"NAME_FILTER\" value=\"^US01_TC01$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^US01_TC01$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: US01_TC01\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Runner\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"KnotisseProject\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"runners.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"runners\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"runners.Runner\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Cucumber Java.Scenario: TC03_The product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details of the seating product.\" />\r\n        <item itemvalue=\"Cucumber Java.Scenario: TC01_The number of products can be listed under Vintage Rugs categories\" />\r\n        <item itemvalue=\"Cucumber Java.Scenario: TC02_Verify the filtering options under Vintage Rugs categories\" />\r\n        <item itemvalue=\"JUnit.Runner\" />\r\n        <item itemvalue=\"Cucumber Java.Scenario: US01_TC01\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"8aeaeea6-4d09-4f71-a369-474301a18c77\" name=\"Changes\" comment=\"\" />\r\n      <created>1725906429422</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1725906429422</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/.idea/workspace.xml	(date 1744388622745)
+@@ -5,11 +5,29 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="8aeaeea6-4d09-4f71-a369-474301a18c77" name="Changes" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/configuration.properties" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.properties" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/test/java/hooks/Hooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hooks/Hooks.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/pages/CataloguePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/CataloguePage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/HomePage.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/pages/RandomPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/RandomPage.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/test/java/pages/VintageRugsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/VintageRugsPage.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US07_Huma_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US07_Huma_StepDefs.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/US07_Huma.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US07_Huma.feature" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/runners/ParallelTestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/runners/ParallelTestRunner.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/runners/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/runners/Runner.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US01_Fatma_StepDefs.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US03_Merve_StepDefs.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/stepDefinitions/US06_Sümeyye_StepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stepDefinitions/US06_Sümeyye_StepDefs.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/utilities/ActionsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utilities/ActionsUtils.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/utilities/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utilities/Driver.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/utilities/ReusableMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utilities/ReusableMethods.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US03_Merve.feature" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/resources/features/US09_Merve.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/US09_Merve.feature" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/test-output/embedded1.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded1.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/test-output/embedded2.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded2.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/test-output/embedded3.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded3.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/test-output/embedded4.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded4.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/test-output/embedded5.png" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/embedded5.png" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -59,24 +77,41 @@
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
++    "Cucumber Java.Feature: US03_Merve.executor": "Run",
+     "Cucumber Java.Scenario: TC01_The number of products can be listed under Vintage Rugs categories.executor": "Run",
+-    "Cucumber Java.Scenario: TC02_Verify the filtering options under Vintage Rugs categories.executor": "Run",
+-    "Cucumber Java.Scenario: TC03_The product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details of the seating product..executor": "Run",
+-    "JUnit.FailedTestRunner.executor": "Run",
++    "Cucumber Java.Scenario: The user can perform a search using the \"THROW PILLOWS\" option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed..executor": "Run",
++    "Cucumber Java.Scenario: The user can perform a search using the 'ALL' option from the dropdown without registering, access the products and product details on the results page, and see the total number of results..executor": "Run",
++    "Cucumber Java.Scenario: The user can perform a search using the 'KNOTISSE PRODUCTION' option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed..executor": "Run",
++    "Cucumber Java.Scenario: The user can perform a search using the 'THROW PILLOWS' option from the dropdown without registering, access the products and their details on the results page, and see the total number of results displayed..executor": "Debug",
++    "Cucumber Java.Scenario: The user can perform a search using the 'UPHOLSTERY' option from the dropdown without registering, view the products and their details on the resulting page, and see the total number of results..executor": "Run",
++    "Cucumber Java.Scenario: The user can search using the 'VINTAGE' option from the dropdown without registering, access the products and product details on the resulting page, and see the total number of results..executor": "Run",
++    "Cucumber Java.Scenario: The user can search using the differet options from the dropdown without registering, access the products and product details on the resulting page, and see the total number of results..executor": "Run",
++    "Cucumber Java.Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results..executor": "Run",
++    "Cucumber Java.Scenario: The user can search via the dropdown using the 'ANTIQUE RUGS' option without registering, access the products and their details on the resulting page, and see the total number of results.executor": "Run",
++    "Cucumber Java.Scenario: The user performs a search using the \"KNOTISSE PRODUCTION\" option without registering, accesses the product results and details, views the total number of results, and sorts the products by rating..executor": "Run",
++    "Cucumber Java.Scenario: The user searches for a specific type of product and views the relevant results..executor": "Run",
++    "Cucumber Java.Scenario: The user should be able to access the contact information by clicking the \"Contact\" link at the top of the page..executor": "Run",
++    "Cucumber Java.Scenario: The user should be able to apply filters to their searches made through the dropdown without registering..executor": "Run",
++    "JUnit.ParallelTestRunner.executor": "Run",
+     "JUnit.Runner.executor": "Run",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+     "git-widget-placeholder": "huma",
+     "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/humai/IdeaProjects/KnotisseProject/src/test/java/stepDefinitions",
+-    "project.structure.last.edited": "Modules",
++    "last_opened_file_path": "C:/Users/humai/IdeaProjects/KnotisseProject",
++    "project.structure.last.edited": "Project",
+     "project.structure.proportion": "0.15",
+     "project.structure.side.proportion": "0.3137931",
+-    "settings.editor.selected.configurable": "preferences.pluginManager"
++    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+   }
+ }]]></component>
+-  <component name="RunManager">
++  <component name="RecentsManager">
++    <key name="CopyClassDialog.RECENTS_KEY">
++      <recent name="stepDefinitions" />
++    </key>
++  </component>
++  <component name="RunManager" selected="Cucumber Java.Scenario: TC01_The number of products can be listed under Vintage Rugs categories">
+     <configuration name="Scenario: TC01_The number of products can be listed under Vintage Rugs categories" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+       <option name="CUCUMBER_CORE_VERSION" value="5" />
+       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/US07_Huma.feature" />
+@@ -172,19 +207,27 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <list>
++      <item itemvalue="Cucumber Java.Scenario: TC01_The number of products can be listed under Vintage Rugs categories" />
++      <item itemvalue="Cucumber Java.Scenario: TC02_Verify the filtering options under Vintage Rugs categories" />
++      <item itemvalue="Cucumber Java.Scenario: TC03_The product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details of the seating product." />
++      <item itemvalue="Cucumber Java.Scenario: US01_TC01" />
++      <item itemvalue="JUnit.Runner" />
++    </list>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Cucumber Java.Scenario: TC03_The product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details of the seating product." />
+         <item itemvalue="Cucumber Java.Scenario: TC01_The number of products can be listed under Vintage Rugs categories" />
+-        <item itemvalue="Cucumber Java.Scenario: TC02_Verify the filtering options under Vintage Rugs categories" />
+         <item itemvalue="JUnit.Runner" />
+         <item itemvalue="Cucumber Java.Scenario: US01_TC01" />
++        <item itemvalue="Cucumber Java.Scenario: TC03_The product detail page displays high-resolution images, detailed description, dimensions, material information, and other relevant details of the seating product." />
++        <item itemvalue="Cucumber Java.Scenario: TC02_Verify the filtering options under Vintage Rugs categories" />
+       </list>
+     </recent_temporary>
+   </component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
++        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+         <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555" />
+       </set>
+     </attachedChunks>
+@@ -199,6 +242,12 @@
+       <updated>1725906429422</updated>
+     </task>
+     <servers />
++  </component>
++  <component name="UnknownFeatures">
++    <option featureType="dependencySupport" implementationName="java:io.cucumber:cucumber-java" />
++    <option featureType="dependencySupport" implementationName="java:io.reactivex.rxjava3:rxjava" />
++    <option featureType="dependencySupport" implementationName="java:org.seleniumhq.selenium:selenium-java" />
++    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+     <option name="TAB_STATES">
+Index: src/test/java/pages/HomePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pages;\r\n\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.support.FindAll;\r\nimport org.openqa.selenium.support.FindBy;\r\nimport org.openqa.selenium.support.FindBys;\r\nimport org.openqa.selenium.support.PageFactory;\r\nimport utilities.Driver;\r\n\r\nimport java.util.List;\r\n\r\npublic class HomePage {\r\n\r\n    public HomePage(){\r\n        PageFactory.initElements(Driver.getDriver(),this);\r\n\r\n    }\r\n\r\n    @FindBy(xpath = \"(//a[@href='#search-lightbox'])[1]\")\r\n    public WebElement searchButtonTopOfHomePage;\r\n\r\n    @FindBy(xpath = \"(//i[@class='icon-search'])[1]\")\r\n    public WebElement searchButtonAfterClickSearchButton;\r\n\r\n    @FindBy(xpath = \"//select[@class='search_categories resize-select mb-0']\")\r\n    public WebElement searchDropdown;\r\n    @FindBy(xpath = \"//h2[text()='NEW ARRIVALS']\")\r\n    public WebElement newArrivals;\r\n    @FindBy(xpath = \"(//span[text()='PRODUCT CATEGORY'])[2]\")\r\n    public WebElement productCategory;\r\n    @FindBy(xpath = \"(//span[text()='PRODUCT SEARCH'])[2]\")\r\n    public WebElement productSearch;\r\n    @FindBy(xpath = \"//h2[text()='FOLLOW US ON INSTAGRAM']\")\r\n    public WebElement followInstagram;\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/pages/HomePage.java b/src/test/java/pages/HomePage.java
+--- a/src/test/java/pages/HomePage.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/pages/HomePage.java	(date 1732186511122)
+@@ -1,5 +1,6 @@
+ package pages;
+ 
++import org.openqa.selenium.By;
+ import org.openqa.selenium.WebElement;
+ import org.openqa.selenium.support.FindAll;
+ import org.openqa.selenium.support.FindBy;
+@@ -13,7 +14,6 @@
+ 
+     public HomePage(){
+         PageFactory.initElements(Driver.getDriver(),this);
+-
+     }
+ 
+     @FindBy(xpath = "(//a[@href='#search-lightbox'])[1]")
+@@ -33,4 +33,155 @@
+     @FindBy(xpath = "//h2[text()='FOLLOW US ON INSTAGRAM']")
+     public WebElement followInstagram;
+ 
++    @FindBy(id = "woocommerce-product-search-field-0")
++    public WebElement searchBox;
++
++    @FindBy(xpath = "(//a[@class='nav-top-link'])[1]")
++    public WebElement contactButton;
++
++    @FindBy(xpath = "//button[@class='woocommerce-button button woocommerce-form-login__submit']")
++    public WebElement loginInPopup;
++
++    @FindBy(id = "username")
++    public WebElement usernameInLoginPopup;
++    @FindBy(linkText = "CATALOGUE")
++    public WebElement catalogue;
++
++
++    @FindBy(xpath = "//a[@href='https://knotisse.com/antique-rugs-turkish-persian/'][1]")
++    public WebElement antiqueRugs;
++
++    @FindBy(xpath = "//a[@href='https://knotisse.com/']")
++    public WebElement homePageLink;
++
++    @FindBy(xpath = "//h2[@class='uppercase']")
++    public WebElement homePageAssert;
++
++    @FindBy(xpath = "//i[@class='icon-instagram'][1]")
++    public WebElement firstInstagramIcon;
++
++    @FindBy(xpath = "//input[@id='account_last_name']")
++    public WebElement lastNameBoxInAccountDetailsMenu;
++
++    @FindBy(xpath = "//input[@id='account_display_name']")
++    public WebElement displayNameBoxInAccountDetailsMenu;
++
++    @FindBy(xpath = "//button[@name='save_account_details']")
++    public WebElement saveChangesButtonInAccountDetailsMenu;
++
++    @FindBy(xpath = "//div[@class='message-container container success-color medium-text-center']")
++    public WebElement accountDetailsChangedSuccessfullyText;
++
++    @FindBy(xpath = "//div[@class='message-container container alert-color medium-text-center']")
++    public WebElement yourCurrentPasswordIsIncorrectText;
++
++    @FindBy(xpath = "(//input[@id='password_current'])[1]")
++    public WebElement currentPasswordBoxInAccountDetailsMenu;
++
++    @FindBy(xpath = "(//input[@id='password_1'])[1]")
++    public WebElement newPasswordBoxInAccountDetailsMenu;
++
++    @FindBy(xpath = "(//input[@id='password_2'])[1]")
++    public WebElement confirmNewPasswordBoxInAccountDetailsMenu;
++    @FindBy(xpath = "//a[@href='https://www.pinterest.com/knotisse'][1]")
++    public WebElement firstPinterestIcon;
++    @FindBy(xpath = "//a[@href='https://www.youtube.com/@KNOTISSE_FineWeavings'][1]")
++    public WebElement firstYoutubeIcon;
++    @FindBy(xpath = "//i[@class='icon-facebook'][1]")
++    public WebElement facebookIconFooter;
++    @FindBy(xpath = "(//i[@class='icon-instagram'])[2]")
++    public WebElement instagramIconFooter;
++    @FindBy(xpath = "(//a[@href='https://www.youtube.com/@KNOTISSE_FineWeavings'])[2]")
++    public WebElement youtubeIconFooter;
++    @FindBy(xpath = "//a[@href='https://www.pinterest.com/knotisse/'][1]")
++    public WebElement pinterestIconFooter;
++    @FindBy(xpath = "(//i[@class='icon-envelop'])[1]")
++    public WebElement emailIcon;
++    @FindBy(xpath = "(//a[@href='tel:+902124582625'])[1]")
++    public WebElement phoneIcon;
++    @FindBy(xpath = "(//a[@href='mailto:info@knotisse.com'])[1]")
++    public WebElement emailIconFooter;
++    @FindBy(xpath = "(//a[@href='tel:+902124582625'])[2]")
++    public WebElement phoneIconFooter;
++    @FindBy(xpath = "//a[@href='http://+902124582625']")
++    public WebElement callUs;
++    @FindBy(xpath = "(//a[@href='#'])[5]")
++    public WebElement myEmailPreferences;
++    @FindBy(xpath = "(//a[@href='https://knotisse.com/my-account/'])[1]")
++    public WebElement loginRegister;
++    @FindBy(xpath = "//input[@id='username']")
++    public WebElement userNameOrEmailTextBox;
++    @FindBy(xpath = "//input[@id='password']")
++    public WebElement passwordTextBox;
++    @FindBy(xpath = "(//button[@name='login'])[1]")
++    public WebElement logInButton;
++    @FindBy(id = "password")
++    public WebElement passwordInLoginPopup;
++
++    @FindBy(xpath = "(//a[@href='https://knotisse.com/my-account/'])[1]")
++    public WebElement loginRegisterIcon;
++
++    @FindBy(xpath = "(//span[@class='header-account-title'])[1]")
++    public WebElement myAccountIcon;
++
++    @FindBy(xpath = "(//a[@href='https://knotisse.com/my-account/edit-account/'])[2]")
++    public WebElement accountDetailsMenu;
++
++    @FindBy(xpath = "//input[@id='account_first_name']")
++    public WebElement firstNameBoxInAccountDetailsMenu;
++
++    @FindBy(xpath = "(//a[@href='https://knotisse.com/privacy-policies/'])[1]")
++    public WebElement privacyPolicy;
++
++    @FindBy(xpath = "//a[@href='https://knotisse.com/custom-made/']")
++    public WebElement servicesLink;
++    @FindBy(xpath = "//a[@href='https://knotisse.com/blog/']")
++    public WebElement blogLink;
++
++    @FindBy(xpath = "//img[@class='header-logo-dark']")
++    public WebElement logo;
++
++
++    @FindBy(xpath = "//*[@class='woocommerce-password-strength bad']")
++    public WebElement underThePasswordBoxTextInAccountDetailsMenu;
++
++    @FindBy(xpath = "//a[@href='https://knotisse.com/terms-and-conditions/']")
++    public WebElement shippingAndReturnsMenu;
++
++    @FindBy(xpath = "//h1[@class='entry-title mb-0']")
++    public WebElement shippingAndReturnsPageTitle;
++
++    @FindBy(xpath = "//*[text()='Ordering Procedure']")
++    public WebElement orderingProcedureInShippingAndReturnsPage;
++
++    @FindBy(xpath = "//*[text()='Return & Cancellation Policy']")
++    public WebElement returnAndCancellationPolicyInShippingAndReturnsPage;
++
++    @FindBy(xpath = "(//*[text()='Contact'])[2]")
++    public WebElement contactTextInBottomOfThePage;
++
++    @FindBy(xpath = "(//*[text()='Our Stores'])[2]")
++    public WebElement ourStoresTextInBottomOfThePage;
++
++    @FindBy(xpath = "//input[@id='reg_email']")
++    public WebElement registerBoxInLoginRegisterPopUp;
++
++    @FindBy(xpath = "//button[@class='woocommerce-Button woocommerce-button button woocommerce-form-register__submit']")
++    public WebElement registerButtonInLoginRegisterPopUp;
++
++    @FindBy(xpath = "//div[@class='message-container container alert-color medium-text-center']")
++    public WebElement errorMessageInLoginRegisterPopUp;
++
++    @FindBy(xpath = "(//*[@class='nav-top-link'])[9]")
++    public WebElement vintageRugsMenu;
++
++    @FindBy(xpath = "(//a[@href='https://knotisse.com/wishlist/'])[4]")
++    public WebElement wishlistMenuInMyAccount;
++
++    @FindBy(xpath = "//a[@href='https://knotisse.com/knotisse-production-design-carpets/']")
++    public WebElement knotisseProductionMenu;
++
++
++
++
+ }
+Index: src/test/java/pages/VintageRugsPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pages;\r\n\r\nimport org.openqa.selenium.By;\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.interactions.Actions;\r\nimport org.openqa.selenium.support.FindBy;\r\nimport org.openqa.selenium.support.PageFactory;\r\nimport utilities.Driver;\r\nimport utilities.ReusableMethods;\r\n\r\nimport java.util.List;\r\n\r\npublic class VintageRugsPage {\r\n\r\n    public VintageRugsPage (){\r\n        PageFactory.initElements(Driver.getDriver(),this);\r\n    }\r\n    // Tüm kategoriler için tek bir dinamik locator kullanacağız.\r\n    public WebElement getCategoryElement(String categoryName) {\r\n        // Kategori adını kullanarak dinamik XPath oluşturuyoruz.\r\n        return Driver.getDriver().findElement(By.xpath(\"//a[text()='\" + categoryName + \"']\"));\r\n    }\r\n\r\n    public void clickCategory(String categoryName) {\r\n        WebElement element = getCategoryElement(categoryName);\r\n        ReusableMethods.click(element);\r\n\r\n    }\r\n    public void hoverOverCategory(String categoryName) {\r\n        Actions actions = new Actions(Driver.getDriver());\r\n        WebElement categoryElement = getCategoryElement(categoryName);\r\n        actions.moveToElement(categoryElement).perform();  // fareyi kategorinin üzerine getirir\r\n    }\r\n\r\n    @FindBy(xpath = \"//*[@id=\\\"wrapper\\\"]/div[2]/div/div[2]/p\")\r\n    public WebElement showingResults;\r\n    @FindBy(xpath = \"//select[@name='orderby']\")\r\n    public WebElement dropdownSorting;\r\n    @FindBy(xpath = \"//div[@class='shop-container']\")\r\n    public List<WebElement> randomProductList;\r\n    @FindBy(xpath = \"//div[contains(@class, 'product-info') and contains(@class, 'summary') and contains(@class, 'col-fit') and contains(@class, 'entry-summary') and contains(@class, 'product-summary')]\")\r\n    public WebElement productInfo;\r\n    @FindBy(xpath = \"//div[contains(@class, 'woocommerce-product-gallery__wrapper') and contains(@class, 'product-gallery-slider') and contains(@class, 'slider') and contains(@class, 'slider-nav-small') and contains(@class, 'mb-half') and contains(@class, 'has-image-zoom') and contains(@class, 'is-draggable') and contains(@class, 'flickity-enabled')]\")\r\n    public WebElement productImage;\r\n    @FindBy(xpath = \"//div[@class='easyzoom-flyout']\")\r\n    public WebElement getProductImageZoom;\r\n\r\n    @FindBy(xpath = \"//button[contains(text(), 'ADD to QUOTE LIST')]\")\r\n    public WebElement addToQuoteListButton;\r\n\r\n    @FindBy(id = \"tab-title-description\")\r\n    public WebElement description;\r\n    @FindBy(id = \"tab-title-additional_information\")\r\n    public WebElement additionalInformation;\r\n    @FindBy(xpath = \"//h3[contains(text(),'Related products')]\")\r\n    public WebElement relatedProducts;\r\n    @FindBy(id = \"woocommerce-product-search-field-2\")\r\n    public WebElement searchInputTopOgPage;\r\n    @FindBy(id = \"woocommerce-product-search-field-3\")\r\n    public WebElement searchInputBottomOgPage;\r\n    @FindBy(id = \"elex-raq-add-sucess-toast\")\r\n    public WebElement productAddedSuccessText;\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/pages/VintageRugsPage.java b/src/test/java/pages/VintageRugsPage.java
+--- a/src/test/java/pages/VintageRugsPage.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/pages/VintageRugsPage.java	(date 1732186477826)
+@@ -63,6 +63,40 @@
+ 
+ 
+ 
++    @FindBy(xpath = "(//*[@class='woocommerce-LoopProduct-link woocommerce-loop-product__link'])[1]")
++    public WebElement firstProductInPage;
++
++    @FindBy(xpath = "(//*[@class='woocommerce-LoopProduct-link woocommerce-loop-product__link'])[2]")
++    public WebElement secondProductInPage;
++
++    @FindBy(xpath = "(//*[@class='icon-heart'])[1]")
++    public WebElement iconHeart;
++
++    @FindBy(xpath = "(//*[@class='wishlist-icon icon-heart has-products'])[1]")
++    public WebElement iconHeartInTheTopOfPage;
++
++    @FindBy(xpath = "(//*[text()='Add to wishlist'])[2]")
++    public WebElement addToWishListButton;
++
++    @FindBy(xpath = "(//*[@class='add_to_wishlist single_add_to_wishlist alt button theme-button-style '])[1]")
++    public WebElement addToWishListButtonInHEartIcon;
++
++    @FindBy(xpath = "(//*[@class='product-name'])[2]")
++    public WebElement firstProductNameInWishList;
++
++    @FindBy(xpath = "(//*[@class='product-name'])[3]")
++    public WebElement secondProductNameInWishList;
++
++    @FindBy(xpath = "(//*[@class='remove remove_from_wishlist'])[1]")
++    public WebElement deleteIconINWishList;
++
++    @FindBy(xpath = "(//*[@class='message-container container success-color medium-text-center'])[1]")
++    public WebElement deleteMessage;
++
+ 
+ 
+-}
++
++
++
++
++}
+\ No newline at end of file
+Index: src/test/java/runners/Runner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package runners;\r\n\r\nimport io.cucumber.junit.Cucumber;\r\nimport io.cucumber.junit.CucumberOptions;\r\nimport org.junit.runner.RunWith;\r\n\r\n@RunWith(Cucumber.class)\r\n@CucumberOptions(\r\n        plugin = {\r\n                \"pretty\",//generates reports in the console as well\r\n                \"html:target/cucumber-reports.html\",\r\n                \"json:target/json-reports/cucumber.json\",\r\n                \"junit:target/xml-reports/cucumber.xml\",\r\n                \"rerun:target/failedRerun.txt\",\r\n                \"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:\"\r\n        },\r\n        monochrome = false,//makes the console reports more readable\r\n        features = \"src/test/resources/features\",//path of the features folder\r\n        glue = {\"stepDefinitions\",\"hooks\"},//path of the stepdefinitions folder\r\n        dryRun = false, //generate the missing step definitions only. Do not run the existing step definitions\r\n        tags = \"@US07\"\r\n\r\n)\r\npublic class Runner {\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/runners/Runner.java b/src/test/java/runners/Runner.java
+--- a/src/test/java/runners/Runner.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/runners/Runner.java	(date 1732186536891)
+@@ -15,10 +15,10 @@
+                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+         },
+         monochrome = false,//makes the console reports more readable
+-        features = "src/test/resources/features",//path of the features folder
+-        glue = {"stepDefinitions","hooks"},//path of the stepdefinitions folder
++        features = "./src/test/resources/features",//path of the features folder
++        glue = {"stepDefinitions", "hooks"},//path of the stepdefinitions folder
+         dryRun = false, //generate the missing step definitions only. Do not run the existing step definitions
+-        tags = "@US07"
++        tags = "@US07TC05"
+ 
+ )
+ public class Runner {
+Index: src/test/java/pages/CataloguePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pages;\r\n\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.support.FindBy;\r\nimport org.openqa.selenium.support.PageFactory;\r\nimport utilities.Driver;\r\n\r\npublic class CataloguePage {\r\n\r\n    public CataloguePage(){\r\n        PageFactory.initElements(Driver.getDriver(),this);\r\n    }\r\n    @FindBy(id = \"menu-item-2210\")\r\n    public WebElement catalogueMenu;\r\n\r\n    @FindBy(xpath = \"//p[@class='woocommerce-result-count hide-for-medium']\")\r\n    public WebElement numberOfResultsAfterProductSearch;\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/pages/CataloguePage.java b/src/test/java/pages/CataloguePage.java
+--- a/src/test/java/pages/CataloguePage.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/pages/CataloguePage.java	(date 1732186433087)
+@@ -16,4 +16,14 @@
+     @FindBy(xpath = "//p[@class='woocommerce-result-count hide-for-medium']")
+     public WebElement numberOfResultsAfterProductSearch;
+ 
++    @FindBy(xpath = "//div[@class='box-text-inner'][1]")
++    public WebElement firstCatalogueDetail;
++
++    @FindBy(xpath = "//select[@class='orderby']")
++    public WebElement orderDropdown;
++
++    @FindBy(xpath = "//nav[@class='woocommerce-breadcrumb breadcrumbs uppercase']")
++    public WebElement searchResultsForText;
++
++
+ }
+Index: src/test/java/utilities/Driver.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package utilities;\r\n\r\n\r\nimport io.github.bonigarcia.wdm.WebDriverManager;\r\nimport org.openqa.selenium.WebDriver;\r\nimport org.openqa.selenium.chrome.ChromeDriver;\r\nimport org.openqa.selenium.chrome.ChromeOptions;\r\nimport org.openqa.selenium.edge.EdgeDriver;\r\nimport org.openqa.selenium.firefox.FirefoxDriver;\r\nimport org.openqa.selenium.safari.SafariDriver;\r\nimport org.openqa.selenium.support.ThreadGuard;\r\n\r\n\r\nimport java.time.Duration;\r\n\r\n/*\r\nNOTE: all of our current codes still works, because this driver is class is good for squential and parallel testing\r\n */\r\npublic class Driver {\r\n    private Driver(){}\r\n    //    private static WebDriver driver;\r\n//    1. Use ThreadLocal WebDriver for parallel testing.\r\n//    Type of the driver is still WebDriver, but this driver is now ThreadLocal\r\n//    driver is thread safe variable to make sure each thread can create a copy of its own driver instance\r\n    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();\r\n\r\n    //    2 Driver.getDriver() will be used in the test classes\r\n//    This will return copy of the driver instance for each thread(browser)\r\n    public static WebDriver getDriver(){\r\n        if (driver.get()==null){\r\n            initializeDriver();\r\n        }\r\n        return driver.get();\r\n    }\r\n\r\n    //    3. initialize the WebDriver instance\r\n    public static void initializeDriver(){\r\n        switch (ConfigReader.getProperty(\"browser\")){\r\n            case \"chrome\":\r\n                WebDriverManager.chromedriver().setup();\r\n//                    driver=new ChromeDriver();\r\n                driver.set(ThreadGuard.protect(new ChromeDriver()));\r\n                break;\r\n            case \"firefox\":\r\n                WebDriverManager.firefoxdriver().setup();\r\n                driver.set(ThreadGuard.protect(new FirefoxDriver()));\r\n                break;\r\n            case \"edge\":\r\n                WebDriverManager.edgedriver().setup();\r\n                driver.set(ThreadGuard.protect(new EdgeDriver()));\r\n                break;\r\n            case \"safari\":\r\n                WebDriverManager.safaridriver().setup();\r\n                driver.set(ThreadGuard.protect(new SafariDriver()));\r\n                break;\r\n            case \"chrome-headless\":\r\n                WebDriverManager.chromedriver().setup();\r\n                driver.set(ThreadGuard.protect(new ChromeDriver(new ChromeOptions().addArguments(\"--headless=new\"))));\r\n                break;\r\n        }\r\n\r\n//            driver -> driver.get()\r\n        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));\r\n        driver.get().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));\r\n        driver.get().manage().window().maximize();\r\n    }\r\n    //    4. close driver\r\n    public static void closeDriver(){\r\n        if (driver!=null){\r\n            driver.get().quit();\r\n            driver.remove();\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/utilities/Driver.java b/src/test/java/utilities/Driver.java
+--- a/src/test/java/utilities/Driver.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/utilities/Driver.java	(date 1732186477855)
+@@ -60,12 +60,12 @@
+         }
+ 
+ //            driver -> driver.get()
+-        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+-        driver.get().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
++        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
++        driver.get().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+         driver.get().manage().window().maximize();
+     }
+     //    4. close driver
+-    public static void closeDriver(){
++   public static void closeDriver(){
+         if (driver!=null){
+             driver.get().quit();
+             driver.remove();
+Index: src/test/java/pages/RandomPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pages;\r\n\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.support.FindBy;\r\nimport org.openqa.selenium.support.PageFactory;\r\nimport utilities.Driver;\r\n\r\npublic class RandomPage {\r\n\r\n    public RandomPage(){\r\n        PageFactory.initElements(Driver.getDriver(),this);\r\n    }\r\n    @FindBy(xpath = \"//*[text()='Vintage Anatolian Kilim Rug (Circa 1970) | 183×320 cm 6×10’7 ft |  PR348018']\")\r\n    public WebElement firstProductAfterAnatolianKilimRugSearch;\r\n\r\n    @FindBy(xpath = \"//*[@class='product-title product_title entry-title']\")\r\n    public WebElement titleOfAfterProductSearch;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/pages/RandomPage.java b/src/test/java/pages/RandomPage.java
+--- a/src/test/java/pages/RandomPage.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/pages/RandomPage.java	(date 1732186433114)
+@@ -5,6 +5,8 @@
+ import org.openqa.selenium.support.PageFactory;
+ import utilities.Driver;
+ 
++import java.util.List;
++
+ public class RandomPage {
+ 
+     public RandomPage(){
+@@ -15,4 +17,44 @@
+ 
+     @FindBy(xpath = "//*[@class='product-title product_title entry-title']")
+     public WebElement titleOfAfterProductSearch;
++
++    @FindBy(xpath = "(//*[@class='plain'])[1]")
++    public WebElement titleOfAfterProductSearchInPopUp;
++
++    @FindBy (id = "yith-wcwl-popup-message")
++    public  WebElement productAddedPopUp;
++
++    @FindBy (xpath ="//a[@class='quick-view quick-view-added'][1]")
++    public  WebElement quickView;
++
++    @FindBy(xpath = "//select[contains(@class, 'orderby')]")
++    public List<WebElement> randomSortingDropdown;
++
++    @FindBy(xpath = "//div[contains(@class, 'box-text box-text-products')]")
++    public List<WebElement> randomProductTitleList;
++
++    @FindBy (xpath ="(//span[@class='x1lliihq x193iq5w x6ikm8r x10wlt62 xlyipyv xuxw1ft'])[1]")
++    public  WebElement knotisseInstagramAssert;
++
++    @FindBy (xpath ="//div[@data-test-id='profile-name']")
++    public  WebElement knotissePinterestAssert;
++
++    @FindBy (xpath ="//span[@class='yt-core-attributed-string yt-core-attributed-string--white-space-pre-wrap'][1]")
++    public  WebElement knotisseYoutubeAssert;
++
++    @FindBy (xpath ="//div[@id='wrapper']")
++    public  WebElement assertPrivacyPolicy;
++
++    @FindBy (xpath ="//div[@id='contact-form-2311']")
++    public  WebElement formInServicesPage;
++
++    @FindBy (xpath ="(//a[@href='https://knotisse.com/turkish-rug-and-kilim-patterns-tradition-symbolism/'])[4]")
++    public  WebElement firstBlog;
++
++    @FindBy (xpath ="//h1[@class='entry-title']")
++    public  WebElement titleOfFirstBlog;
++
++
++
++
+ }
+Index: src/test/java/utilities/ActionsUtils.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package utilities;\r\nimport org.openqa.selenium.Keys;\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.interactions.Actions;\r\n\r\npublic class ActionsUtils {\r\n\r\n    //    ACTIONS_RIGHT CLICK\r\n    public static void actionsRightClickOnElement(WebElement element) {\r\n        new Actions(Driver.getDriver()).contextClick(element).perform();\r\n    }\r\n    //ACTIONS_DOUBLE CLICK\r\n    public static void actionsDoubleClick(WebElement element) {\r\n        new Actions(Driver.getDriver()).doubleClick(element).build().perform();\r\n    }\r\n    //    ACTIONS_HOVER_OVER\r\n    public static void actionsHoverOverOnElement(WebElement element) {\r\n        //        Actions actions = new Actions(driver);\r\n        new Actions(Driver.getDriver()).moveToElement(element).perform();\r\n    }\r\n    //    ACTIONS_SCROLL_DOWN\r\n    public static void actionsScrollDown() {\r\n        //        Actions actions = new Actions(driver);\r\n        new Actions(Driver.getDriver()).sendKeys(Keys.PAGE_DOWN).perform();\r\n    }\r\n    //    ACTIONS_SCROLL_UP\r\n    public static void actionsScrollUp() {\r\n        //        Actions actions = new Actions(driver);\r\n        new Actions(Driver.getDriver()).sendKeys(Keys.PAGE_UP).perform();\r\n    }\r\n    //    ACTIONS_SCROLL_RIGHT\r\n    public static void actionsScrollRight(){\r\n        new Actions(Driver.getDriver()).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).perform();\r\n    }\r\n    //    ACTIONS_SCROLL_LEFT\r\n    public static void actionsScrollLeft(){\r\n        new Actions(Driver.getDriver()).sendKeys(Keys.ARROW_LEFT).sendKeys(Keys.ARROW_LEFT).perform();\r\n    }\r\n    //    ACTIONS_DRAG_AND_DROP\r\n    public static void actionsDragAndDrop(WebElement source, WebElement target) {\r\n        //        Actions actions = new Actions(driver);\r\n        new Actions(Driver.getDriver()).dragAndDrop(source,target).perform();\r\n    }\r\n    //    ACTIONS_DRAG_AND_DROP_BY\r\n    public static void actionsDragAndDrop(WebElement source, int x, int y) {\r\n        //        Actions actions = new Actions(driver);\r\n        new Actions(Driver.getDriver()).dragAndDropBy(source,x,y).perform();\r\n    }\r\n    //    ACTIONS_TAB\r\n    public static void actionsTab(WebElement element) {\r\n        //        Actions actions = new Actions(driver);\r\n        new Actions(Driver.getDriver()).sendKeys(Keys.TAB).build().perform();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/utilities/ActionsUtils.java b/src/test/java/utilities/ActionsUtils.java
+--- a/src/test/java/utilities/ActionsUtils.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/utilities/ActionsUtils.java	(date 1732186503176)
+@@ -5,6 +5,10 @@
+ 
+ public class ActionsUtils {
+ 
++    //    ACTIONS_SENDKEYS
++    public static void actionsSendKeys(WebElement element, String value) {
++        new Actions(Driver.getDriver()).sendKeys(element, value).perform();
++    }
+     //    ACTIONS_RIGHT CLICK
+     public static void actionsRightClickOnElement(WebElement element) {
+         new Actions(Driver.getDriver()).contextClick(element).perform();
+Index: src/test/java/runners/ParallelTestRunner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package runners;\r\n\r\nimport io.cucumber.junit.Cucumber;\r\nimport io.cucumber.junit.CucumberOptions;\r\nimport org.junit.runner.RunWith;\r\n\r\n@RunWith(Cucumber.class)\r\n@CucumberOptions(\r\n        plugin={\"html:target\\\\Pcucumber-reports1.html\",\r\n                \"json:target/json-reports/Pcucumber1.json\",\r\n                \"junit:target/xml-report/Pcucumber1.xml\"},\r\n        features=\"src/test/resources/uiFeature/Login.feature\",\r\n        glue= \"stepDefinitions\",\r\n        tags=\"\"  ,\r\n\r\n        dryRun= false\r\n\r\n)\r\npublic class ParallelTestRunner {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/runners/ParallelTestRunner.java b/src/test/java/runners/ParallelTestRunner.java
+--- a/src/test/java/runners/ParallelTestRunner.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/runners/ParallelTestRunner.java	(date 1732186477887)
+@@ -9,9 +9,9 @@
+         plugin={"html:target\\Pcucumber-reports1.html",
+                 "json:target/json-reports/Pcucumber1.json",
+                 "junit:target/xml-report/Pcucumber1.xml"},
+-        features="src/test/resources/uiFeature/Login.feature",
++        features="./src/test/resources/features",
+         glue= "stepDefinitions",
+-        tags=""  ,
++        tags="@US07"  ,
+ 
+         dryRun= false
+ 
+Index: configuration.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#browser=chrome\r\nbrowser=firefox\r\n#browser=edge\r\n#browser=safari\r\n\r\nbaseUrl=https://knotisse.com/\r\nsearchedWordInTitle=Antique\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n#Kenan (56-105)\r\ndeanKenan= HasanDean\r\nkenanPas=Aa349712\r\nadminKenan=KenanAdmin\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n#Safiye(106-155)\r\nadminName_SK=SafiyeBatch171\r\npasswordName_SK=Safiye171\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n#Durdugül(156-205)\r\nuserName_DB=Durdygul\r\npassword_DB=Proje@85\r\nAdminUserName_DB = AdminBatch171\r\nAdminPassword_DB = Batch171+\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n#Emre(206-255)\r\nuserNameTeacher_Ep=TeacherAkmer\r\nuserNameStudent_Ep=StudentAkmer\r\npassword_Ep=12345.Ab\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n#Sena(256-305)\r\nViceDeanUserName = ViceDean\r\nViceDeanPassword = Aa1234567\r\nAdminUserNameSA = AdminBatch171\r\nAdminPasswordSA = Batch171+\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n#Saadet(306-355)\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n#Ibrahim(356-405)\r\nteacherUserName_IO=Ramazan\r\nteacherPassword_IO=Ramozan+1\r\nabsentee_IO=7\r\nmidtermNotu_IO=99\r\nmidtermNotu2_IO=-1\r\nfinalNotu_IO=99\r\nfinalNotu2_IO=101\r\nbilgiNotu_IO=5*'lik bir ogrenci\r\nabsentee1_IO=5\r\nmidtermNotu1_IO=90\r\nfinalNotu1_IO=95\r\nbilgiNotu1_IO=4*'lik bir ogrenci\r\nadminUserName_IO=AdminBatch171\r\nadminPassword_IO=Batch171+\r\nname_IO=Ozaner\r\nsurname_IO=Guneyli\r\nbirthPlace_IO=Guneysu\r\ngender_IO=2\r\nbirthDate_IO=01-01-1980\r\nphoneNo_IO=846-309-0064\r\nssnNo_IO=846-30-9006\r\nusername_IO=ozanguneyli\r\npassword_IO=ozanG22+\r\nssnNo1_IO=846-330-0871\r\npassword1_IO=ozanG1+\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n#Yasemin (406-455)\r\nviceDeanY = Bella\r\npasswordY = Batch171\r\nteacher = John Doe\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n#Esra(456-505)\r\nadminNameEsi =HubertAdmin\r\npasswordEsi= Admin123\r\ndeanSsnEsi = 121-34-6839\r\ndeanBirthDayEsi=07.02.1978\r\ndeanPhoneEsi=551-345-4838\r\ndeangelecekTarihEsi=01.01.2024\r\nssnTiresizEsi=12152434212\r\nssnSekizRakamEsi=121-34-136\r\nssnOnRakamEsi=123-234-5678\r\npasswordYediEsi=Admin12\r\npasswordBYokEsi=admin123\r\npasswordkYokEsi=ADMIN123\r\npasswordRYokEsi=Adminnnn\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/configuration.properties b/configuration.properties
+--- a/configuration.properties	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/configuration.properties	(date 1732186433121)
+@@ -4,7 +4,21 @@
+ #browser=safari
+ 
+ baseUrl=https://knotisse.com/
+-searchedWordInTitle=Antique
++emailForRegister=fatmakrms044@gmail.com
++passwordForRegister=KNOTISEFATMA
++validFirstNameForAccountDetailsMenu=Fatma
++validLastNameForAccountDetailsMenu=Karmis
++displayNameForAccountDetailsMenu=fatmakrms044
++invalidFirstNameForAccountDetailsMenu=1234
++invalidLastNameForAccountDetailsMenu=5678
++invalidPasswordForRegister=KNOTISEFATMA1
++validNewPassword=KNOTISEFATMA34
++shortNewPassword=KNOTISSE
++shippingAndReturnPageTitle=Shipping and Return Policy
++invaliEmailForRegister=fatmakaa00@gmail.com
++firstProductInVintageRugsTitle=Anatolian Kilim Runner
++secondProductInVintageRugsTitle=Abstract Pattern Yellow Rug
++deletedMessage=Product successfully removed.
+ 
+ 
+ 
+Index: src/test/java/stepDefinitions/US06_Sümeyye_StepDefs.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package stepDefinitions;\r\n\r\nimport io.cucumber.java.en.Then;\r\nimport io.cucumber.java.en.When;\r\nimport utilities.ConfigReader;\r\nimport utilities.Driver;\r\n\r\n\r\npublic class US06_Sümeyye_StepDefs {\r\n\r\n    @When(\"İlgili web siteye gidilir\")\r\n    public void i̇lgili_web_siteye_gidilir() throws InterruptedException {\r\n\r\n        Driver.getDriver().get(ConfigReader.getProperty(\"baseUrl\"));\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/stepDefinitions/US06_Sümeyye_StepDefs.java b/src/test/java/stepDefinitions/US06_Sümeyye_StepDefs.java
+--- a/src/test/java/stepDefinitions/US06_Sümeyye_StepDefs.java	(revision 9bfb3dd1da6602f152c1556433e9ec4f8cc1c521)
++++ b/src/test/java/stepDefinitions/US06_Sümeyye_StepDefs.java	(date 1732186511067)
+@@ -1,21 +1,0 @@
+-package stepDefinitions;
+-
+-import io.cucumber.java.en.Then;
+-import io.cucumber.java.en.When;
+-import utilities.ConfigReader;
+-import utilities.Driver;
+-
+-
+-public class US06_Sümeyye_StepDefs {
+-
+-    @When("İlgili web siteye gidilir")
+-    public void i̇lgili_web_siteye_gidilir() throws InterruptedException {
+-
+-        Driver.getDriver().get(ConfigReader.getProperty("baseUrl"));
+-    }
+-
+-
+-
+-
+-
+-}
